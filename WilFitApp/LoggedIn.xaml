@@ -1,0 +1,73 @@
+﻿<Window
+    x:Class="WilFitApp.LoggedIn"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WilFitApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="250"
+    Height="212"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Border
+        Background="White"
+        CornerRadius="30"
+        MouseDown="Border_MouseDown">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Margin="0,0,20,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Cursor="Hand"
+                FontSize="18"
+                FontWeight="SemiBold"
+                Foreground="#30ad9a"
+                MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
+                Text="X" />
+            <StackPanel Grid.Row="1">
+                <TextBlock
+                    Margin="0,5,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    TextAlignment="Center">
+                    <Run>Successfully</Run>
+                    <LineBreak />
+                    <Run>Logged In!</Run>
+                    <TextBlock.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Offset="0" Color="#30ad9a" />
+                            <GradientStop Offset="1" Color="#18c274" />
+                        </LinearGradientBrush>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <Button
+                    Width="150"
+                    Height="40"
+                    Click="Button_Click"
+                    Content="Ok"
+                    Cursor="Hand"
+                    Foreground="White"
+                    Style="{StaticResource ButtonLogin}">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Offset="0" Color="#30ad9a" />
+                            <GradientStop Offset="1" Color="#18c274" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

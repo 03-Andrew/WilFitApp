@@ -1,0 +1,88 @@
+﻿<Page
+    x:Class="WilFitApp.zPages.FoodPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WilFitApp.zPages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="FoodPage"
+    d:DesignHeight="660"
+    d:DesignWidth="910"
+    mc:Ignorable="d">
+
+    <Border Background="Transparent" CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+            <Border
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="20"
+                Background="AliceBlue"
+                CornerRadius="20">
+
+                <Label
+                    x:Name="Name_Lbl"
+                    Margin="20"
+                    Content="Input food"
+                    FontSize="20" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="20"
+                Background="AliceBlue"
+                CornerRadius="20">
+
+                <Label
+                    x:Name="Name_Lbl2"
+                    Margin="20"
+                    Content="View Foods Table"
+                    FontSize="20" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="20"
+                Background="AliceBlue"
+                CornerRadius="20">
+                <TextBlock
+                    Margin="20"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="20"
+                    FontWeight="SemiBold"
+                    Text="Water Intake" />
+                
+            </Border>
+            <Border
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="20"
+                Background="AliceBlue"
+                CornerRadius="20">
+                <TextBlock
+                    Margin="20"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="20"
+                    FontWeight="SemiBold"
+                    Text="Calorie Intake" />
+                
+                
+            </Border>
+            
+            
+        </Grid>
+
+
+    </Border>
+</Page>

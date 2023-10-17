@@ -1,0 +1,135 @@
+﻿<Window
+    x:Class="WilFitApp.DashBoard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WilFitApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="clr-namespace:WilFitApp.MVVM.ViewModel"
+    Title="DashBoard"
+    Width="1080"
+    Height="720"
+    AllowsTransparency="True"
+    Background="Transparent"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    
+    <Border
+        Background="#eff2f7"
+        CornerRadius="0"
+        MouseDown="Border_MouseDown">
+        <!--<Button Content="Button" HorizontalAlignment="Left" Margin="400,295,0,0" VerticalAlignment="Top" Click="Button_Click"/>-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border
+                Grid.Row="0"
+                Grid.Column="0"
+                Background="LightGray" />
+            <Border
+                Grid.Row="0"
+                Grid.Column="1"
+                Background="LightGray" />
+            <Border
+                Grid.Row="1"
+                Margin="20"
+                CornerRadius="30"
+                MouseLeftButtonDown="Border_MouseLeftButtonDown"
+                Opacity="1">
+                <Border.Background>
+
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#30ad9a" />
+                        <GradientStop Offset="1" Color="#18c274" />
+                    </LinearGradientBrush>
+
+                </Border.Background>
+                <Grid>
+                    <StackPanel>
+
+                        <Icon:PackIconMaterial
+                            Width="50"
+                            Height="35"
+                            Margin="20,30,0,10"
+                            Kind="Run"
+                            Style="{StaticResource menuButtonIcon}" />
+
+                        <Separator
+                            Height="1"
+                            Margin="20,10,20,0"
+                            Background="White"
+                            Opacity="0.7">
+                            <Separator.Effect>
+                                <DropShadowEffect
+                                    Direction="270"
+                                    Opacity="0.5"
+                                    ShadowDepth="2"
+                                    Color="Black" />
+                            </Separator.Effect>
+                        </Separator>
+
+
+                        <Button x:Name="Home_Btn" 
+                                Style="{StaticResource MenuIcon}" Click="HomeButtonClick">
+                            
+                            <!--Command="{Binding HomeViewCommand}">-->
+                            <Icon:PackIconMaterial Kind="Home" Style="{StaticResource menuButtonIcon}" />
+                        </Button>
+
+                        <Button x:Name="Food_Btn" Style="{StaticResource MenuIcon}" Click="Food_Btn_Click">
+                            <!-- Command="{Binding FoodViewCommand}">-->
+                            
+                            <Icon:PackIconMaterial Kind="FoodForkDrink" Style="{StaticResource menuButtonIcon}" />
+                        </Button>
+
+                        <Button x:Name="Workout_Btn" Style="{StaticResource MenuIcon}" Click="Workout_Btn_Click">
+                            <Icon:PackIconMaterial Kind="Dumbbell" Style="{StaticResource menuButtonIcon}" />
+                        </Button>
+
+                        <Button x:Name="WorkoutLog" Style="{StaticResource MenuIcon}" Click="WorkoutLog_Click">
+                            <Icon:PackIconMaterial Kind="ChartAreaspline" Style="{StaticResource menuButtonIcon}" />
+                        </Button>
+
+
+
+                    </StackPanel>
+                    <StackPanel Margin="20" VerticalAlignment="Bottom">
+                        <Button Click="Button_Click_1" Style="{StaticResource MenuIcon}">
+                            <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}" />
+                        </Button>
+                    </StackPanel>
+
+                </Grid>
+
+
+            </Border>
+
+
+            <!--<ContentControl
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10" 
+                Content="{Binding CurrentView}">
+            </ContentControl>-->
+
+            <Frame x:Name="MainFrame" Grid.Column="1" Grid.Row="1" Margin="0 20 20 20" NavigationUIVisibility="Hidden"/>
+
+
+
+        </Grid>
+
+
+
+    </Border>
+</Window>

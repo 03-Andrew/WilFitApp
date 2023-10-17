@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="WilFitApp.zPages.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WilFitApp.zPages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="HomePage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Border Background="Beige" CornerRadius="30">
+        <Grid>
+            <ProgressBar
+                x:Name="progressBar"
+                Height="30"
+                Margin="20"
+                VerticalAlignment="Top"
+                Maximum="2500"
+                Value="0" />
+            <TextBox
+                x:Name="caloriesInput"
+                Height="20"
+                Margin="20,105,692,0"
+                VerticalAlignment="Top" />
+            <Button
+                Width="120"
+                Height="20"
+                Margin="130,0,0,325"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="AddCalories_Click"
+                Content="Add Calories" />
+            <Label
+                x:Name="caloriesLabel"
+                Margin="20,0,0,357"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Content="Calories Consumed: 0" />
+        </Grid>
+    </Border>
+</Page>

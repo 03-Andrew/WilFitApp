@@ -1,0 +1,84 @@
+﻿<Page
+    x:Class="WilFitApp.zPages.DataGridPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WilFitApp.zPages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
+    Title="DataGridPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Cursor" Value="SizeWE" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DataGridColumnHeaderStyle2" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                        <Grid>
+                            <theme:DataGridHeaderBorder
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                IsHovered="{TemplateBinding IsMouseOver}"
+                                IsPressed="{TemplateBinding IsPressed}"
+                                SeparatorBrush="{TemplateBinding SeparatorBrush}"
+                                SeparatorVisibility="{TemplateBinding SeparatorVisibility}"
+                                SortDirection="{TemplateBinding SortDirection}">
+                                <ContentPresenter
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    RecognizesAccessKey="True"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </theme:DataGridHeaderBorder>
+                            <Thumb
+                                x:Name="PART_LeftHeaderGripper"
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource ColumnHeaderGripperStyle}" />
+                            <Thumb
+                                x:Name="PART_RightHeaderGripper"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource ColumnHeaderGripperStyle}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Border Background="White" CornerRadius="20">
+        <Grid>
+            <Label Content="Enter food" Height="30" Width="100" Margin="102,80,598,340"/>
+            <Label x:Name="inputTypeLbl" Content="Enter amount in" Height="30" Margin="299,80,360,340"/>
+            <TextBox x:Name="caloriesAmountTxtBox" Height="30" Margin="299,115,360,305"/>
+            <TextBox x:Name="FoodTxtBox" Height="30" Margin="102,115,556,305"/>
+            <Button x:Name="checkTableBtn" Height="30" Width="100" Content="Check database" Margin="123,164,577,256" Click="checkTableBtn_Click"/>
+            <Button x:Name="addCalorriesBtn" Content="Add caloies" Height="30" Width="100" Margin="320,205,380,215" />
+            <Label x:Name="caloriesAmountLbl" Content="Amount of calories" Height="30" Width="150" Margin="299,161,351,259"/>
+            <DataGrid
+                x:Name="Foods"
+                Margin="469,56,81,179"
+                AutoGenerateColumns="True"
+                ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}"
+                IsReadOnly="True" />
+            
+        </Grid>
+
+
+
+    </Border>
+</Page>

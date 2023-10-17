@@ -1,0 +1,318 @@
+﻿<Page
+    x:Class="WilFitApp.zPages.HomePage1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WilFitApp.zPages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="HomePage1"
+    d:DesignHeight="660"
+    d:DesignWidth="910"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="borderStyle_row2" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="Margin" Value="20,40,15,20" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect
+                        Direction="315"
+                        Opacity="0.5"
+                        ShadowDepth="3"
+                        Color="DarkGray" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Border Background="#eff2f7">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="280" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="303*" />
+                    <ColumnDefinition Width="590*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border
+                        Grid.Row="0"
+                        Margin="20,20,20,10"
+                        Background="#ffffff"
+                        CornerRadius="20">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                Direction="315"
+                                Opacity="0.5"
+                                ShadowDepth="3"
+                                Color="DarkGray" />
+                        </Border.Effect>
+                        <TextBlock
+                            Height="40"
+                            Margin="20,20,404,100"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Foreground="#03bf69"
+                            Text="Workout" />
+                    </Border>
+                    <Border
+                        Grid.Row="1"
+                        Margin="20,10,20,20"
+                        Background="#ffffff"
+                        CornerRadius="20">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                Direction="315"
+                                Opacity="0.5"
+                                ShadowDepth="3"
+                                Color="DarkGray" />
+                        </Border.Effect>
+                        <TextBlock
+                            Height="40"
+                            Margin="20,20,440,100"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Foreground="#03bf69"
+                            Text="Food" />
+                    </Border>
+
+                </Grid>
+                <Border
+                    Grid.Column="0"
+                    Margin="20 20 5 20"
+                    CornerRadius="20">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0" Color="#30ad9a" />
+                            <GradientStop Offset="1" Color="#16c274" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect
+                            Direction="315"
+                            Opacity="0.5"
+                            ShadowDepth="3"
+                            Color="DarkGray" />
+                    </Border.Effect>
+                    <StackPanel>
+                        <Label
+                            x:Name="greetLbl"
+                            Margin="0,10,0,10"
+                            HorizontalAlignment="Center"
+                            Content="Hello"
+                            FontSize="20"
+                            FontWeight="SemiBold"
+                            Foreground="White" />
+                        <Icon:PackIconMaterial
+                            Width="60"
+                            Height="60"
+                            HorizontalAlignment="Center"
+                            Foreground="White"
+                            Kind="Emoticon" />
+                        <Grid Height="141" Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="99*"/>
+                                <ColumnDefinition Width="43*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Height="31"
+                                Margin="10,0,10,0"
+                                VerticalAlignment="Top"
+                                Content="Current Weight: "
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="White" />
+                            <Label  Grid.Column="1"
+                                x:Name="weightLbl"
+                                Height="31"
+                                Margin="0,0,10,110"
+                                HorizontalContentAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Content="HEHE"
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="White" />
+                            <Label
+                                Height="32"
+                                Margin="10,0,46,80"
+                                VerticalAlignment="Bottom"
+                                Content="Goal Weight: "
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="White" />
+                            <Label
+                                x:Name="goalWeightLbl"
+                                HorizontalContentAlignment="Right"
+                                Height="31"
+                                Margin="0,29,10,0"
+                                VerticalAlignment="Top"
+                                Content="HEHE"
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="White" Grid.Column="1" />
+                            <Label
+                                Margin="10,56,14,57"
+                                Content="Recommended Water: "
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="White" />
+                            <Label
+                                Grid.Column="1"
+                                x:Name="recommendedWaterLbl"
+                                HorizontalContentAlignment="Right"
+                                Height="30"
+                                VerticalAlignment="Center"
+                                Content="HEHE"
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="White" Margin="0,0,10,0" />
+                            <Label
+                                Height="29"
+                                Margin="10,0,5,30"
+                                VerticalAlignment="Bottom"
+                                Content="Recommended calories: "
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="White" />
+                            <Label
+                                Grid.Column="1"
+                                x:Name="caloriesLbl"
+                                HorizontalContentAlignment="Right"
+                                Height="30"
+                                Margin="0,82,10,0"
+                                VerticalAlignment="Top"
+                                Content="HEHE"
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="White" />
+                            <Label
+                                Height="29"
+                                Margin="10,0,72,1"
+                                VerticalAlignment="Bottom"
+                                Content="Activity Level: "
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="White" />
+                            <Label
+                                x:Name="activityLvl"
+                                HorizontalContentAlignment="Right"
+                                Height="30"
+                                Margin="160,110,10,0"
+                                VerticalAlignment="Top"
+                                Content="HEHE"
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="White" Grid.ColumnSpan="2" />
+                        </Grid>
+                    </StackPanel>
+
+
+
+                </Border>
+
+
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Style="{StaticResource borderStyle_row2}" />
+                <Border
+                    Grid.Column="0"
+                    Height="50"
+                    Margin="125,17,125,0"
+                    VerticalAlignment="Top"
+                    CornerRadius="20">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0" Color="#30ad9a" />
+                            <GradientStop Offset="1" Color="#16c274" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect
+                            Direction="315"
+                            Opacity="0.5"
+                            ShadowDepth="3"
+                            Color="DarkGray" />
+
+                    </Border.Effect>
+                    <Icon:PackIconMaterial
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Kind="FoodForkDrink"
+                        Style="{StaticResource menuButtonIcon}" />
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource borderStyle_row2}" />
+                <Border
+                    Grid.Column="1"
+                    Height="50"
+                    Margin="125,17,125,0"
+                    VerticalAlignment="Top"
+                    CornerRadius="20">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0" Color="#30ad9a" />
+                            <GradientStop Offset="1" Color="#16c274" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect
+                            Direction="315"
+                            Opacity="0.5"
+                            ShadowDepth="3"
+                            Color="DarkGray" />
+
+                    </Border.Effect>
+                    <Icon:PackIconMaterial
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Kind="Dumbbell"
+                        Style="{StaticResource menuButtonIcon}" />
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource borderStyle_row2}" />
+                <Border
+                    Grid.Column="2"
+                    Height="50"
+                    Margin="125,17,125,0"
+                    VerticalAlignment="Top"
+                    CornerRadius="20">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0" Color="#30ad9a" />
+                            <GradientStop Offset="1" Color="#16c274" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect
+                            Direction="315"
+                            Opacity="0.5"
+                            ShadowDepth="3"
+                            Color="DarkGray" />
+
+                    </Border.Effect>
+                    <Icon:PackIconMaterial
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Kind="ChartArc"
+                        Style="{StaticResource menuButtonIcon}" />
+                </Border>
+            </Grid>
+        </Grid>
+
+
+    </Border>
+</Page>

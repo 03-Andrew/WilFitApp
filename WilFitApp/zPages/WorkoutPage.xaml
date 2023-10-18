@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WilFitApp.zPages"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="WorkoutPage"
     d:DesignHeight="660"
@@ -43,7 +44,7 @@
 
             </Style>
             <Style TargetType="Button">
-                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Background" Value="White" />
                 <Setter Property="BorderBrush" Value="Gray" />
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="Padding" Value="15,5,5,5" />
@@ -371,69 +372,92 @@
                     </StackPanel>
                     <Border
                         Grid.Column="1"
-                        Width="240"
-                        Margin="0,40,0,20"
-                        HorizontalAlignment="Left"
-                        BorderBrush="Gray"
+                        Background="#FAF9F6"
+                        BorderBrush="White"
                         BorderThickness="1"
-                        CornerRadius="5">
-                        <Grid Width="238" HorizontalAlignment="Right">
+                        CornerRadius="0 20 20 0">
+
+                        <Grid Width="240" HorizontalAlignment="Left">
+                            <!--<Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>-->
+
                             <TextBlock
-                                Width="97"
+                                Margin="25,20,125,148"
+                                FontSize="20"
+                                FontWeight="Bold"
+                                Text="Weight" />
+
+                            <TextBlock
+                                Width="49"
                                 Height="20"
-                                Margin="15,16,0,0"
+                                Margin="150,54,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                Text="Current weight:" />
+                                Text="Current: " />
                             <Label
                                 x:Name="currWeightLbl"
-                                Width="96"
-                                Height="27"
-                                Margin="132,10,0,0"
-                                HorizontalAlignment="Left"
+                                Height="26"
+                                Margin="197,49,0,0"
                                 VerticalAlignment="Top"
-                                HorizontalContentAlignment="Right"
+                                HorizontalContentAlignment="Left"
                                 Content="HEHE" />
                             <TextBlock
-                                Width="97"
+                                Width="33"
                                 Height="18"
-                                Margin="15,38,0,0"
+                                Margin="150,115,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                Text="Goal weight:" />
+                                Text="Goal:" />
                             <Label
                                 x:Name="goalWeightLbl"
-                                Width="96"
-                                Height="27"
-                                Margin="132,30,0,0"
-                                HorizontalAlignment="Left"
+                                Height="28"
+                                Margin="197,111,0,0"
                                 VerticalAlignment="Top"
-                                HorizontalContentAlignment="Right"
+                                HorizontalContentAlignment="Left"
                                 Content="HEHE" />
                             <TextBlock
                                 Width="100"
                                 Height="20"
-                                Margin="69,75,0,0"
+                                Margin="25,54,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                Text="Update Weight"
-                                TextAlignment="Center" />
+                                Text="Update Current"
+                                TextAlignment="Left" />
                             <TextBox
                                 x:Name="newWeight"
-                                Width="100"
                                 Height="30"
-                                Margin="15,100,0,0"
-                                HorizontalAlignment="Left"
+                                Margin="25,79,115,0"
                                 VerticalAlignment="Top" />
                             <Button
                                 x:Name="updateWeight"
-                                Width="100"
+                                Width="90"
                                 Height="30"
-                                Margin="125,100,0,0"
+                                Margin="150,79,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 Click="updateWeight_Click"
-                                Content="Update Weight" />
+                                Content="Update" />
+                            <TextBlock
+                                Height="20"
+                                Margin="25,115,125,0"
+                                VerticalAlignment="Top"
+                                Text="Update Goal"
+                                TextAlignment="Left" />
+                            <TextBox
+                                x:Name="newGoalWeight"
+                                Height="30"
+                                Margin="25,141,115,0"
+                                VerticalAlignment="Top" />
+                            <Button
+                                x:Name="updateGoalWeight"
+                                Height="30"
+                                Margin="150,141,0,0"
+                                VerticalAlignment="Top"
+                                Click="updateGoalWeight_Click"
+                                Content="Update" />
                         </Grid>
                     </Border>
 
@@ -454,21 +478,31 @@
                 </Border.Effect>
 
                 <StackPanel Grid.Row="1">
-                    <TextBlock
-                        Margin="20,15,0,0"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Text="Workout History">
-                        <TextBlock.Foreground>
-                            <LinearGradientBrush>
-                                <GradientStop Offset="1" Color="#30ad9a" />
-                                <GradientStop Offset="0." Color="#18c274" />
-                            </LinearGradientBrush>
-                        </TextBlock.Foreground>
-                    </TextBlock>
+                    <Grid>
+                        <TextBlock
+                            Margin="20,15,450,15"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Text="Workout History">
+                            <TextBlock.Foreground>
+                                <LinearGradientBrush>
+                                    <GradientStop Offset="1" Color="#30ad9a" />
+                                    <GradientStop Offset="0." Color="#18c274" />
+                                </LinearGradientBrush>
+                            </TextBlock.Foreground>
+
+
+                        </TextBlock>
+
+                        <TextBox x:Name="searchTxtBox" Width="229" Margin="646,0,0,0" HorizontalAlignment="Left" Height="30" VerticalAlignment="Center" TextChanged="TextBox_TextChanged"/>
+                        <Icon:PackIconMaterial Kind="Magnify" Foreground="Gray" Margin="853,0,0,0" VerticalAlignment="Center" Width="13" Height="12"/>
+
+                    </Grid>
+
+
                     <DataGrid
                         Name="WorkoutLog"
-                        Height="336"
+                        Height="315"
                         Margin="20,5,10,0"
                         AutoGenerateColumns="False"
                         CellStyle="{DynamicResource DataGridCellStyle1}"
@@ -476,6 +510,12 @@
                         RowStyle="{DynamicResource DataGridRowStyle1}"
                         Style="{DynamicResource DataGridStyle1}">
                         <DataGrid.Columns>
+                            <DataGridTextColumn
+                                x:Name="id"
+                                Width="20*"
+                                MinWidth="10"
+                                Binding="{Binding ID}"
+                                Header="#" />
                             <DataGridTextColumn
                                 Width="70*"
                                 MinWidth="20"
@@ -508,10 +548,13 @@
                                 Header="Description" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <StackPanel
-                        Height="22"
-                        Margin="20,10,20,0"
-                        Orientation="Horizontal" />
+                    <Button
+                        x:Name="deleteBtn"
+                        Width="100"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        Click="deleteBtn_Click"
+                        Content="Delete" />
                 </StackPanel>
             </Border>
 

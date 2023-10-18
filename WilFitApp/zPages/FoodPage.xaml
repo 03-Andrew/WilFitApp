@@ -13,8 +13,8 @@
     <Border Background="Transparent" CornerRadius="20">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="51*" />
+                <ColumnDefinition Width="79*" />
 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -25,7 +25,7 @@
             <Border
                 Grid.Row="0"
                 Grid.Column="1"
-                Margin="20"
+                Margin="20,20,20,20"
                 Background="AliceBlue"
                 CornerRadius="20">
 
@@ -37,21 +37,59 @@
             </Border>
             <Border
                 Grid.Row="1"
-                Grid.Column="2"
-                Margin="20"
+                Grid.Column="1"
+                Margin="20,20,20,20"
                 Background="AliceBlue"
                 CornerRadius="20">
+                <Grid>
+                    <Label
+                        x:Name="Name_Lbl2"
+                        Margin="20,20,229,235"
+                        Content="View Foods Table"
+                        FontSize="20" />
+                    <TextBox
+                        x:Name="searchTxtBox"
+                        Height="30"
+                        Margin="256,25,47,235"
+                        TextChanged="TextBox_TextChanged" />
+                    <DataGrid
+                        x:Name="foodTable"
+                        Margin="10,70,10,10"
+                        AutoGenerateColumns="False"
+                        CellStyle="{DynamicResource DataGridCellStyle1}"
+                        ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                        RowStyle="{DynamicResource DataGridRowStyle1}"
+                        Style="{DynamicResource DataGridStyle1}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="70*"
+                                MinWidth="20"
+                                Binding="{Binding foodName}"
+                                Header="Food" />
+                            <DataGridTextColumn
+                                Width="70*"
+                                MinWidth="20"
+                                Binding="{Binding servingSize}"
+                                Header="Serving size" />
+                            <DataGridTextColumn
+                                Width="70*"
+                                MinWidth="20"
+                                Binding="{Binding measurement}"
+                                Header="measurement" />
+                            <DataGridTextColumn
+                                Width="70*"
+                                MinWidth="20"
+                                Binding="{Binding calPerServing}"
+                                Header="cal/serving size" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
 
-                <Label
-                    x:Name="Name_Lbl2"
-                    Margin="20"
-                    Content="View Foods Table"
-                    FontSize="20" />
             </Border>
             <Border
                 Grid.Row="1"
                 Grid.Column="0"
-                Margin="20"
+                Margin="20,20,20,20"
                 Background="AliceBlue"
                 CornerRadius="20">
                 <TextBlock
@@ -61,12 +99,12 @@
                     FontSize="20"
                     FontWeight="SemiBold"
                     Text="Water Intake" />
-                
+
             </Border>
             <Border
                 Grid.Row="0"
                 Grid.Column="0"
-                Margin="20"
+                Margin="20,20,20,20"
                 Background="AliceBlue"
                 CornerRadius="20">
                 <TextBlock
@@ -76,11 +114,11 @@
                     FontSize="20"
                     FontWeight="SemiBold"
                     Text="Calorie Intake" />
-                
-                
+
+
             </Border>
-            
-            
+
+
         </Grid>
 
 

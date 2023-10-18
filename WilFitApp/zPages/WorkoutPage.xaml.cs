@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Web.UI.WebControls;
 using System.Windows;
 using System.Windows.Controls;
 using WilFitApp.DataBase;
@@ -20,6 +21,7 @@ namespace WilFitApp.zPages
         connection con = new connection();
         SqlConnection conn;
         SqlCommand cmd;
+        DataTable dataTable;
         DateTime time1;
         string _name;
         bool otherSelected = false;
@@ -192,7 +194,7 @@ namespace WilFitApp.zPages
                     conn.Open();
                     cmd = new SqlCommand(query, conn);
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    DataTable dataTable = new DataTable();
+                    dataTable = new DataTable();
                     adapter.Fill(dataTable);
 
                     WorkoutLog.ItemsSource = dataTable.DefaultView;
@@ -265,8 +267,63 @@ namespace WilFitApp.zPages
             {
                 MessageBox.Show("Input a valid number");
             }
+        }
+        private void updateGoalWeight_Click(object sender, RoutedEventArgs e)
+        { 
+            try
+            {
+                double updatedGoalWeight = Convert.ToDouble(newGoalWeight.Text);
+                string query1 = $"Update UserInfo set goalWeight = {updatedGoalWeight} where userName = '{_name}'";
+                using (conn = con.getCon())
+                {
+                    conn.Open();
+                    using (cmd = new SqlCommand(query1, conn))
+                    {
 
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Weight updated successfully.");
+                            setLable();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No records were updated. Check if the date exists in your database.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Input a valid number: " + ex);
+            }
+        }
 
+        private void deleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = searchTxtBox.Text.ToLower();
+
+            // Use a DataView to filter the DataTable
+            DataView dataView = dataTable.DefaultView;
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                // Apply a filter to the dataView based on the search text
+                dataView.RowFilter = $"workoutType LIKE '%{searchText}%'";
+            }
+            else
+            {
+                // Clear the filter if the search text is empty
+                dataView.RowFilter = string.Empty;
+            }
+
+            // Update the DataGrid with the filtered data
+            WorkoutLog.ItemsSource = dataView;
         }
     }
 }

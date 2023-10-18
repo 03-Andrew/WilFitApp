@@ -76,13 +76,14 @@ namespace WilFitApp
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             getUserInfo();
-            generateNewTable();
+            
         }
 
         private void generateNewTable()
         {
             string tableName = $"{username_txtBox.Text}_workoutLog";
             string createTableQuery = $@"CREATE TABLE {tableName} (
+                                         ID INT IDENTITY(1,1) PRIMARY KEY,
                                          dateOfWorkout DATE,
                                          timeOfWorkout TIME,
                                          workoutType VARCHAR(50),
@@ -119,47 +120,21 @@ namespace WilFitApp
                 string fullName = fullname_txtBox.Text;
                 string password = password_txtBox.Password;
                 string cPassword = cpassword_txtBox.Password;
-                int age = Convert.ToInt16(age_txtBox.Text);
-                string gender = male_radioBtn.IsChecked == true ? "Male" : "Female";
-                MessageBox.Show($"You selected {gender}.");
+              
                 double weight = Convert.ToDouble(weight_txtBox.Text);
                 double weightG = Convert.ToDouble(aimedWright_txtBox.Text);
+                string goal = weight < weightG ? "gain" : "lose";
                 double height = Convert.ToDouble(height_txtBox.Text);
-                string selectedLevel = "";
+               
                 double waterIntake = weight * 0.033;
 
                 double caloriesNeeded;
                 double level = 0;
+                string selectedLevel = "";
 
-                /*
-                if (Sedentary_RadioBtn.IsChecked == true)
-                {
-                    selectedLevel = "Sedentary";
-                    level = Convert.ToDouble(1.2);
-                }
-                else if (LightlyActive_RadioBtn.IsChecked == true)
-                {
-                    selectedLevel = "Lightly Active";
-                    level = Convert.ToDouble(1.375);
-
-                }
-                else if (ModActive_RadioBtn.IsChecked == true)
-                {
-                    selectedLevel = "Moderately Active";
-                    level = Convert.ToDouble(1.55);
-                }
-                else if (Active_RadioBtn.IsChecked == true)
-                {
-                    selectedLevel = "Active";
-                    level = Convert.ToDouble(1.725);
-                }
-                else if (VActive_RadioBtn.IsChecked == true)
-                {
-                    selectedLevel = "Very Active";
-                    level = Convert.ToDouble(1.9);
-
-                }
-                */
+                int age = Convert.ToInt16(age_txtBox.Text);
+                string gender = male_radioBtn.IsChecked == true ? "Male" : "Female";
+                
                 Dictionary<RadioButton, (string level, double factor)> activityLevels = new Dictionary<RadioButton, (string level, double factor)>
                 {
                     { Sedentary_RadioBtn, ("Sedentary", 1.2) },
@@ -174,33 +149,68 @@ namespace WilFitApp
                     if (kvp.Key.IsChecked == true)
                     {
                         selectedLevel = kvp.Value.level;
-                        
                         level = kvp.Value.factor;
                         break; // Exit the loop once a match is found
                     }
                 }
 
-                MessageBox.Show($"You selected {selectedLevel}.");
+                //  MessageBox.Show($"You selected {selectedLevel}.");
+                double bmr = CalculateBMR(gender, weight, height, age);
+                caloriesNeeded = bmr * level;
 
-                if (gender == "Male")
-                {
-                    double bmr = 66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age);
-                    caloriesNeeded = bmr * level;
-                }
-                else
-                {
-                    double bmr = 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age);
-                    caloriesNeeded = bmr * level;
-                }
 
                 if (password != cPassword)
                 {
                     MessageBox.Show("Confirm Passowrd and Passoword are not eqaul");
+                    return;
                 }
-                else
+                using(conn = con.getCon())
                 {
-                    //Store values to data base
-                    conn = con.getCon();
+                    conn.Open();
+                    string checkUserQuery = $"SELECT COUNT(*) FROM UserInfo WHERE userName = '{userName}'";
+                    using (cmd = new SqlCommand(checkUserQuery, conn))
+                    {
+                        int existingUserCount = (int)cmd.ExecuteScalar();
+                        if (existingUserCount > 0)
+                        {
+                            MessageBox.Show("Username already exists. Please choose a different username.");
+                        }
+                        else
+                        {
+                            // Store values in the database
+                            using (SqlCommand cmd = new SqlCommand($"INSERT INTO UserInfo VALUES('{fullName}', '{userName}', '{password}', {age}, '{gender}', {weight}, " +
+                                            $"{weightG}, {height}, {caloriesNeeded}, {waterIntake}, '{selectedLevel}', '{goal}')", conn))
+                            {
+                                cmd.ExecuteNonQuery();
+                            }
+                            MessageBox.Show($"Hi {userName}, you need {caloriesNeeded} calories, Registration complete");
+                            generateNewTable();
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid inputs");
+            }
+
+        }
+
+        private double CalculateBMR(string gender, double weight, double height, int age)
+        {
+            if (gender == "Male")
+            {
+                return 66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age);
+            }
+            return 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age);
+        }
+    }
+}
+
+
+/*
+ * conn = con.getCon();
                     conn.Open();
                     cmd = new SqlCommand($"insert into UserInfo values('{fullName}','{userName}','{password}',{age},'{gender}',{weight}," +
                                                                      $"{weightG},{height},{caloriesNeeded},{waterIntake},'{selectedLevel}')", conn);
@@ -212,14 +222,33 @@ namespace WilFitApp
                     this.Close();
                     cmd.Dispose();
                     conn.Close();
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Invalid inputs");
-            }
-
-        }
-
-    }
+ */
+/*
+if (Sedentary_RadioBtn.IsChecked == true)
+{
+    selectedLevel = "Sedentary";
+    level = Convert.ToDouble(1.2);
 }
+else if (LightlyActive_RadioBtn.IsChecked == true)
+{
+    selectedLevel = "Lightly Active";
+    level = Convert.ToDouble(1.375);
+
+}
+else if (ModActive_RadioBtn.IsChecked == true)
+{
+    selectedLevel = "Moderately Active";
+    level = Convert.ToDouble(1.55);
+}
+else if (Active_RadioBtn.IsChecked == true)
+{
+    selectedLevel = "Active";
+    level = Convert.ToDouble(1.725);
+}
+else if (VActive_RadioBtn.IsChecked == true)
+{
+    selectedLevel = "Very Active";
+    level = Convert.ToDouble(1.9);
+
+}
+*/

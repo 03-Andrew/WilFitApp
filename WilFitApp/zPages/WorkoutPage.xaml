@@ -550,9 +550,7 @@
                     </DataGrid>
                     <Button
                         x:Name="deleteBtn"
-                        Width="100"
-                        Margin="20,0,0,0"
-                        HorizontalAlignment="Left"
+                        Width="500"
                         Click="deleteBtn_Click"
                         Content="Delete" />
                 </StackPanel>

@@ -264,7 +264,7 @@
                             Margin="20,20,0,0"
                             FontSize="20"
                             FontWeight="Bold"
-                            Text="Workout Log">
+                            Text="JOMJOMJOMJOMJOMJOM">
                             <TextBlock.Foreground>
                                 <LinearGradientBrush>
                                     <GradientStop Offset="1" Color="#30ad9a" />

@@ -16,9 +16,9 @@
     WindowStyle="None">
 
     <Window.DataContext>
-        <viewModel:MainViewModel/>
+        <viewModel:MainViewModel />
     </Window.DataContext>
-    
+
     <Border
         Background="#eff2f7"
         CornerRadius="0"
@@ -80,24 +80,35 @@
                         </Separator>
 
 
-                        <Button x:Name="Home_Btn" 
-                                Style="{StaticResource MenuIcon}" Click="HomeButtonClick">
-                            
-                            <!--Command="{Binding HomeViewCommand}">-->
+                        <Button
+                            x:Name="Home_Btn"
+                            Click="HomeButtonClick"
+                            Style="{StaticResource MenuIcon}">
+
+                            <!--  Command="{Binding HomeViewCommand}">  -->
                             <Icon:PackIconMaterial Kind="Home" Style="{StaticResource menuButtonIcon}" />
                         </Button>
 
-                        <Button x:Name="Food_Btn" Style="{StaticResource MenuIcon}" Click="Food_Btn_Click">
-                            <!-- Command="{Binding FoodViewCommand}">-->
-                            
+                        <Button
+                            x:Name="Food_Btn"
+                            Click="Food_Btn_Click"
+                            Style="{StaticResource MenuIcon}">
+                            <!--  Command="{Binding FoodViewCommand}">  -->
+
                             <Icon:PackIconMaterial Kind="FoodForkDrink" Style="{StaticResource menuButtonIcon}" />
                         </Button>
 
-                        <Button x:Name="Workout_Btn" Style="{StaticResource MenuIcon}" Click="Workout_Btn_Click">
+                        <Button
+                            x:Name="Workout_Btn"
+                            Click="Workout_Btn_Click"
+                            Style="{StaticResource MenuIcon}">
                             <Icon:PackIconMaterial Kind="Dumbbell" Style="{StaticResource menuButtonIcon}" />
                         </Button>
 
-                        <Button x:Name="WorkoutLog" Style="{StaticResource MenuIcon}" Click="WorkoutLog_Click">
+                        <Button
+                            x:Name="WorkoutLog"
+                            Click="WorkoutLog_Click"
+                            Style="{StaticResource MenuIcon}">
                             <Icon:PackIconMaterial Kind="ChartAreaspline" Style="{StaticResource menuButtonIcon}" />
                         </Button>
 
@@ -119,11 +130,17 @@
             <!--<ContentControl
                 Grid.Row="1"
                 Grid.Column="1"
-                Margin="10" 
+                Margin="10"
                 Content="{Binding CurrentView}">
             </ContentControl>-->
 
-            <Frame x:Name="MainFrame" Grid.Column="1" Grid.Row="1" Margin="0 20 20 20" NavigationUIVisibility="Hidden"/>
+            <Frame
+                x:Name="MainFrame"
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0,20,20,20"
+   
+                NavigationUIVisibility="Hidden" />
 
 
 

@@ -11,6 +11,7 @@
     mc:Ignorable="d">
 
     <Border Background="Transparent" CornerRadius="20">
+   
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="51*" />

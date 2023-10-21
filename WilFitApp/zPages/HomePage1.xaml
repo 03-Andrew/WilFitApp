@@ -213,7 +213,7 @@
                             FontSize="16" Cursor="Hand"
                             >
                         <StackPanel Margin="0,0,-530,0">
-                            <!--<Image Source="/Images/RunningTry.png" Height="141" Width="435" HorizontalAlignment="Right"/>-->
+                            <Image Source="/Images/RunningTry.png" Height="141" Width="435" HorizontalAlignment="Right"/>
                             <TextBlock Foreground="Black" Text="Workout" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,-140,0,0" FontSize="18"/>
                         </StackPanel>
 
@@ -242,7 +242,7 @@
                             >
 
                         <StackPanel Margin="0,0,-554,0">
-                            <!--<Image Source="/Images/SaladTry.png" Height="141" Width="438" Margin="70,0,0,0"/>-->
+                            <Image Source="/Images/SaladTry.png" Height="141" Width="438" Margin="70,0,0,0"/>
                             <TextBlock Foreground="Black" Text="Food" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,-140,0,0" FontSize="18"/>
                         </StackPanel>
 

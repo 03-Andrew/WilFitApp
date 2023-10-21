@@ -1,4 +1,5 @@
 ﻿using ControlzEx.Standard;
+using Syncfusion.Windows.Shared;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Web.UI.WebControls;
 using System.Windows;
 using System.Windows.Controls;
 using WilFitApp.DataBase;
+using WilFitApp.MVVM.Model;
 
 namespace WilFitApp.zPages
 {
@@ -25,6 +27,10 @@ namespace WilFitApp.zPages
         DateTime time1;
         string _name;
         bool otherSelected = false;
+        string type;
+        WorkoutLog log;
+        private DataRowView selectedRow;
+
         public WorkoutPage(string name)
         {
 
@@ -127,44 +133,7 @@ namespace WilFitApp.zPages
             return category;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            DateTime? selectedDate = datePicker.SelectedDate;  // Use nullable DateTime to handle null selection
-            try
-            {
-                if (ValidateTimeInput() && selectedDate.HasValue)
-                {
-
-                    string type = otherSelected ? otherTxtBox.Text : MyComboBox.SelectedItem.ToString();
-                    string category = categoryTxtBox.Text;
-                    string duration = durationTxtBox.Text;
-                    string description = descriptionTxtBox.Text;
-                    DateTime date1 = DateTime.ParseExact(selectedDate.Value.ToString("yyyy-MM-dd"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                    time1 = DateTime.ParseExact(timeTxtBox.Text, "HH:mm", CultureInfo.InvariantCulture);
-                    string dateStr = date1.ToString("yyyy-MM-dd");
-                    string timeStr = time1.ToString("HH:mm");
-
-                    
-                    using (SqlConnection conn = con.getCon())
-                    {
-                        conn.Open();
-                        string query = $"INSERT INTO {_name}_workoutLog VALUES ('{dateStr}', '{timeStr}', '{type}', '{category}', '{duration}', '{description}')";
-                        MessageBox.Show("HEHE");
-                        using (cmd = new SqlCommand(query, conn))
-                        {
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("Success");
-                            LoadDataIntoDataGrid();
-                        }
-                    }   
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("Error1: " + ex);
-            }
-            
-        }
+       
 
         private bool ValidateTimeInput()
         {
@@ -184,32 +153,20 @@ namespace WilFitApp.zPages
 
         private void LoadDataIntoDataGrid()
         {
+            string query = $"SELECT * FROM {_name}_workoutLog";
 
-            try
+            using (conn = con.getCon())
             {
-                string query = $"SELECT * FROM {_name}_workoutLog";
-
-                using (conn = con.getCon())
-                {
-                    conn.Open();
-                    cmd = new SqlCommand(query, conn);
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    dataTable = new DataTable();
-                    adapter.Fill(dataTable);
-
-                    WorkoutLog.ItemsSource = dataTable.DefaultView;
-                }
+                conn.Open();
+                cmd = new SqlCommand(query, conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                WorkoutLog.ItemsSource = dataTable.DefaultView;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error" + ex);
-            }
+            
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void setLable()
         {
             using (conn = con.getCon())
@@ -228,6 +185,7 @@ namespace WilFitApp.zPages
                 }
             }
         }
+
         private void updateWeight_Click(object sender, RoutedEventArgs e)
         {
             DateTime dateNow = DateTime.Now;
@@ -268,6 +226,7 @@ namespace WilFitApp.zPages
                 MessageBox.Show("Input a valid number");
             }
         }
+
         private void updateGoalWeight_Click(object sender, RoutedEventArgs e)
         { 
             try
@@ -299,11 +258,6 @@ namespace WilFitApp.zPages
             }
         }
 
-        private void deleteBtn_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = searchTxtBox.Text.ToLower();
@@ -325,5 +279,250 @@ namespace WilFitApp.zPages
             // Update the DataGrid with the filtered data
             WorkoutLog.ItemsSource = dataView;
         }
+
+        private void WorkoutLog_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (WorkoutLog.SelectedItem != null)
+            {
+                // Assuming you have a class 'Person' with Name and Age properties.
+                DataRowView selectedRow = (DataRowView)WorkoutLog.SelectedItem;
+
+                type = selectedRow["id"]?.ToString();
+                rowLbl.Content = "Selected item: " + type;
+            }
+            else
+            {
+                // Handle the case where no item is selected (clear the label)
+                rowLbl.Content = "Selected Item: ";
+            }
+
+        }
+
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime? selectedDate = datePicker.SelectedDate;  // Use nullable DateTime to handle null selection
+            try
+            {
+                if (!ValidateTimeInput() && !selectedDate.HasValue)
+                {
+                    return;  
+                }
+                DateTime date1 = DateTime.ParseExact(selectedDate.Value.ToString("yyyy-MM-dd"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                time1 = DateTime.ParseExact(timeTxtBox.Text, "HH:mm", CultureInfo.InvariantCulture);
+                log = new WorkoutLog();
+                log.workoutType = otherSelected ? otherTxtBox.Text : MyComboBox.SelectedItem.ToString();
+                log.workoutCategory = categoryTxtBox.Text;
+                log.duration = durationTxtBox.Text;
+                log.date = date1.ToString("yyyy-MM-dd");
+                log.time = time1.ToString("HH:mm");
+                log.description = descriptionTxtBox.Text;
+
+                using (SqlConnection conn = con.getCon())
+                {
+                    conn.Open();
+                    string query = $"INSERT INTO {_name}_workoutLog VALUES ('{log.date}', '{log.time}', '{log.workoutType}'," +
+                        $" '{log.workoutCategory}', '{log.duration}', '{log.description}')";
+                    MessageBox.Show(log.time);
+                    MessageBox.Show("HEHE");
+                    using (cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Success");
+                        LoadDataIntoDataGrid();
+                        clearEntries();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error1: " + ex);
+            }
+
+        }
+        
+
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(type == null)
+            {
+                return;
+            }
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this item?", 
+                    "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
+
+            using (conn = con.getCon())
+            {
+                conn.Open();
+                string query = $"delete from {_name}_workoutLog where id = {type}";
+                using (cmd = new SqlCommand(query, conn))
+                {
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected < 0)
+                    {
+                        MessageBox.Show("Row not found or could not be deleted.");
+                        return;
+                        
+                    }
+                    MessageBox.Show("Row deleted successfully.");
+                    LoadDataIntoDataGrid(); // Refresh the DataGrid after deletion.
+                }
+            }          
+        }
+
+        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string vals = "";
+            foreach (DataColumn column in dataTable.Columns)
+            {
+                //MessageBox.WriteLine(column.ColumnName);
+                vals += column.ColumnName + "\n";
+            }
+            MessageBox.Show(vals);
+            try
+            {
+                if (WorkoutLog.SelectedItem == null)
+                {
+                    return;
+                }
+                selectedRow = (DataRowView)WorkoutLog.SelectedItem;
+                string selectedWorkoutType = selectedRow["workoutType"]?.ToString();
+
+                // Populate input controls with data from the selected row for editing
+                MyComboBox.SelectedItem = MyComboBox.Items.Contains(selectedWorkoutType) ? selectedWorkoutType : "Other";
+                otherTxtBox.Text = (MyComboBox.SelectedItem as string == "Other") ? selectedWorkoutType : "";
+                categoryTxtBox.Text = selectedRow["workoutCategory"]?.ToString();
+                durationTxtBox.Text = selectedRow["durationMinutes"]?.ToString();
+                descriptionTxtBox.Text = selectedRow["description"]?.ToString();
+
+                string dateString = selectedRow["dateOfWorkout"]?.ToString();
+                if (DateTime.TryParse(dateString, out DateTime date))
+                {
+                    datePicker.SelectedDate = date;
+                }
+                else
+                {
+                    datePicker.SelectedDate = null; // Handle invalid date gracefully
+                }
+
+                // Parse and set the time
+                string timeString = selectedRow["timeOfWorkout"]?.ToString().Substring(0, 5);
+                
+                MessageBox.Show("Retrieved time: " + timeString);
+                if (DateTime.TryParseExact(timeString, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime time))
+                {
+                    timeTxtBox.Text = time.ToString("HH:mm");
+                }
+                else
+                {
+                    timeTxtBox.Text = ""; // Handle invalid time gracefully
+                }
+
+                enterLog.Visibility = Visibility.Collapsed;
+
+
+
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime? selectedDate = datePicker.SelectedDate;  // Use nullable DateTime to handle null selection
+            try
+            {
+                if (!ValidateTimeInput() && !selectedDate.HasValue)
+                {
+                    return;
+                }
+                DateTime date1 = DateTime.ParseExact(selectedDate.Value.ToString("yyyy-MM-dd"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                time1 = DateTime.ParseExact(timeTxtBox.Text, "HH:mm", CultureInfo.InvariantCulture);
+                log = new WorkoutLog();
+                log.workoutType = otherSelected ? otherTxtBox.Text : MyComboBox.SelectedItem.ToString();
+                log.workoutCategory = categoryTxtBox.Text;
+                log.duration = durationTxtBox.Text;
+                log.date = date1.ToString("yyyy-MM-dd");
+                log.time = time1.ToString("HH:mm");
+                log.description = descriptionTxtBox.Text;
+
+                using (SqlConnection conn = con.getCon())
+                {
+                    conn.Open();
+                    string query = $"UPDATE {_name}_workoutLog " +
+                                   $"SET dateOfWorkout = '{log.date}', timeOfWorkout = '{log.time}', workoutType = '{log.workoutType}', " +
+                                   $"workoutCategory = '{log.workoutCategory}', durationMinutes = '{log.duration}', description = '{log.description}' " +
+                                   $"WHERE id = {selectedRow["id"]}";
+
+                    using (cmd = new SqlCommand(query, conn))
+                    {
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected < 0)
+                        {
+                            MessageBox.Show("Row not found or could not be updated.");
+                            return;
+                        }
+                        MessageBox.Show("Row updated successfully.");
+                        enterLog.Visibility = Visibility.Visible;
+                        LoadDataIntoDataGrid();
+                        clearEntries();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Error: " + ex);
+            }
+
+        }
+        
+
+        private void clearEntries()
+        {
+            MyComboBox.SelectedItem = MyComboBox.Items[0];
+            categoryTxtBox.Text = "";
+            datePicker.Text = "";
+            timeTxtBox.Text = "hh:mm";
+            durationTxtBox.Text = "";
+            otherTxtBox.Text = "";
+            descriptionTxtBox.Text = "";
+        }
+
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            
+            if (timeTxtBox.Text == "hh:mm")
+            {
+                timeTxtBox.Text = "";
+            }
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            
+            if (string.IsNullOrWhiteSpace(timeTxtBox.Text))
+            {
+                timeTxtBox.Text = "hh:mm";
+            }
+        }
+
     }
 }
+
+//string type = otherSelected ? otherTxtBox.Text : MyComboBox.SelectedItem.ToString();
+//string category = categoryTxtBox.Text;
+//string duration = durationTxtBox.Text;
+//string description = descriptionTxtBox.Text;
+//DateTime date1 = DateTime.ParseExact(selectedDate.Value.ToString("yyyy-MM-dd"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+//time1 = DateTime.ParseExact(timeTxtBox.Text, "HH:mm", CultureInfo.InvariantCulture);
+//string dateStr = date1.ToString("yyyy-MM-dd");
+//string timeStr = time1.ToString("HH:mm");

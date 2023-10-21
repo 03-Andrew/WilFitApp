@@ -78,19 +78,26 @@
                             FontWeight="Bold"
                             Foreground="White"
                             Text="Sign in" />
-                       
+
                         <TextBox
                             x:Name="UserNameTxtBox"
                             Width="290"
                             Height="50"
                             Margin="0,0,0,15"
-                            Style="{StaticResource RoundedTextBoxStyle}"/>
+                            GotFocus="UserNameTxtBox_GotFocus"
+                            LostFocus="UserNameTxtBox_LostFocus"
+                            Style="{StaticResource RoundedTextBoxStyle}">
+                            Username
+                        </TextBox>
                         <PasswordBox
                             x:Name="PasswordTextBox"
                             Width="290"
                             Height="50"
                             Margin="0,0,0,15"
+                            GotFocus="PasswordTextBox_GotFocus"
+                            LostFocus="PasswordTextBox_LostFocus"
                             Password="Password"
+                            
                             Style="{StaticResource PasswordBoxForm}" />
 
                         <Button

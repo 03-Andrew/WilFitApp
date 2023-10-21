@@ -59,7 +59,7 @@ namespace WilFitApp
                 {
                     conn.Open();
 
-                    string query = "SELECT COUNT(*) FROM [dbo].[UserInfo] WHERE userName=@userName AND password=@password";
+                    string query = "SELECT COUNT(*) FROM UserInfo WHERE userName=@userName AND password=@password";
                     SqlCommand cmd = new SqlCommand(query, conn);
 
                     cmd.Parameters.AddWithValue("@userName", UserNameTxtBox.Text);
@@ -129,9 +129,37 @@ namespace WilFitApp
             }
         }
 
+        private void UserNameTxtBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (UserNameTxtBox.Text == "Username")
+            {
+                UserNameTxtBox.Text = "";
+            }
+        }
 
+        private void UserNameTxtBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(UserNameTxtBox.Text))
+            {
+                UserNameTxtBox.Text = "Username";
+            }
+        }
 
+        private void PasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(PasswordTextBox.Password))
+            {
+                PasswordTextBox.Password = "Password";
+            }
+        }
 
+        private void PasswordTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordTextBox.Password == "Password")
+            {
+                PasswordTextBox.Password = "";
+            }
+        }
     }
 
 

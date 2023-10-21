@@ -42,7 +42,7 @@ namespace WilFitApp.zPages
 
         private void UpdateProgressBar()
         {
-            progressBar.Value = caloriesConsumed;
+            progress.Value = caloriesConsumed;
         }
 
         private void UpdateCaloriesLabel()

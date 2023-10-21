@@ -99,5 +99,10 @@ namespace WilFitApp
         {
             MainFrame.Content = new zPages.DataGridPage(_name);
         }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

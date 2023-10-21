@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
+                <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Border
@@ -40,7 +40,13 @@
             <Border
                 Grid.Row="0"
                 Grid.Column="1"
-                Background="LightGray" />
+                Background="LightGray">
+                <Grid>
+                    <TextBlock Text="X" HorizontalAlignment="Left" FontWeight="SemiBold"  Margin="930,6,0,6" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Width="10"/>
+
+                </Grid>
+
+            </Border>
             <Border
                 Grid.Row="1"
                 Margin="20"

@@ -2,6 +2,8 @@
     x:Class="WilFitApp.zPages.HomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WilFitApp.zPages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -11,9 +13,32 @@
     mc:Ignorable="d">
 
     <Border Background="Beige" CornerRadius="30">
-        <Grid>
+        <Grid x:Name="Grid">
+            
+            <!--<Syncfusion:SfCircularProgressBar
+                
+                x:Name="sfCircularProgressBar"
+                IndicatorInnerRadius="0.6"
+                IndicatorOuterRadius="0.75"
+                IsIndeterminate="False"
+                
+                ProgressColor="BlueViolet"
+                ShowProgressValue="True"
+                TrackInnerRadius="0.75"
+                TrackOuterRadius="0.6">
+                <Syncfusion:SfCircularProgressBar.RangeColors>
+                    <Syncfusion:RangeColorCollection>
+                        <Syncfusion:RangeColor
+                            
+                            Start="0"
+                            Color="#30ad9a"/>
+                       
+                    </Syncfusion:RangeColorCollection>
+                </Syncfusion:SfCircularProgressBar.RangeColors>
+            </Syncfusion:SfCircularProgressBar>-->
+
             <ProgressBar
-                x:Name="progressBar"
+                x:Name="progress"
                 Height="30"
                 Margin="20"
                 VerticalAlignment="Top"

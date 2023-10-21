@@ -76,6 +76,9 @@ namespace WilFitApp
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             getUserInfo();
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            this.Close();
             
         }
 
@@ -177,22 +180,21 @@ namespace WilFitApp
                         }
                         else
                         {
-                            // Store values in the database
+                            //Store values in the database
                             using (SqlCommand cmd = new SqlCommand($"INSERT INTO UserInfo VALUES('{fullName}', '{userName}', '{password}', {age}, '{gender}', {weight}, " +
-                                            $"{weightG}, {height}, {caloriesNeeded}, {waterIntake}, '{selectedLevel}', '{goal}')", conn))
+                                            $"{weightG}, {height} ,{caloriesNeeded}, {waterIntake}, '{selectedLevel}', '{goal}')", conn))
                             {
                                 cmd.ExecuteNonQuery();
                             }
                             MessageBox.Show($"Hi {userName}, you need {caloriesNeeded} calories, Registration complete");
                             generateNewTable();
                         }
-
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Invalid inputs");
+                MessageBox.Show("Invalid inputs: " + ex );
             }
 
         }

@@ -136,7 +136,7 @@
                 VerticalAlignment="Bottom"
                 Content="Calories Consumed: 0" />
             <Button
-                    Content="Button"
+                    Content="Clear"
                     HorizontalAlignment="Left"
                     Margin="130,142,0,0"
                     VerticalAlignment="Top"

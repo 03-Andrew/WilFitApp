@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WilFitApp.DataBase;
 
 namespace WilFitApp.zPages
 {
@@ -20,26 +22,94 @@ namespace WilFitApp.zPages
     /// </summary>
     public partial class HomePage : Page
     {
+        private double caloriesConsumed = 0;
         public HomePage()
         {
             InitializeComponent();
+            updateProgressBar();
+            SetLabel2();
         }
-        private double caloriesConsumed = 0;
+        connection con = new connection();
+        SqlConnection conn;
+        SqlCommand cmd;
         private void AddCalories_Click(object sender, RoutedEventArgs e)
         {
-            if (double.TryParse(caloriesInput.Text, out double caloriesToAdd))
+            using (SqlConnection conn = con.getCon())
             {
-                caloriesConsumed += caloriesToAdd; // Add the specified calories to the total consumed
-                UpdateProgressBar();
-                UpdateCaloriesLabel();
-                caloriesInput.Clear(); // Clear the input TextBox
-            }
-            else
-            {
-                MessageBox.Show("Please enter a valid number of calories.");
+                conn.Open();
+
+                if (int.TryParse(caloriesInput.Text, out int newCalories))
+                {
+                    SqlCommand selectCmd = new SqlCommand("SELECT progressBarValue FROM progressBar;", conn);
+                    int currentValue = Convert.ToInt32(selectCmd.ExecuteScalar());
+
+                    int updatedValue = currentValue + newCalories;
+
+                    SqlCommand updateCmd = new SqlCommand($"UPDATE progressBar SET progressBarValue = {updatedValue};", conn);
+                    updateCmd.ExecuteNonQuery();
+
+                    conn.Close();
+
+                    updateProgressBar();                }
             }
         }
 
+
+
+        public void updateProgressBar()
+        {
+            try
+            {
+                using (conn = con.getCon())
+                {
+
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT progressBarValue FROM progressBar;", conn);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && double.TryParse(result.ToString(), out double progressValue))
+                    {
+                        progress.Value = progressValue;
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions, such as displaying an error message or logging the error.
+            }
+        }
+
+
+        public void SetLabel2()
+        {
+            try
+            {
+
+                using (conn = con.getCon())
+                {
+                    conn.Open();
+                    string query2 = $"SELECT progressBarValue FROM progressBar";
+                    using (cmd = new SqlCommand(query2, conn))
+                    using (SqlDataReader reader2 = cmd.ExecuteReader())
+                    {
+
+                        if (reader2.Read())
+                        {
+                            caloriesLabel.Content = "Your Calorie Intake: "+reader2["progressBarValue"];
+
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex) { }
+        }
+
+
+
+
+
+        /*
         private void UpdateProgressBar()
         {
             progress.Value = caloriesConsumed;
@@ -49,5 +119,6 @@ namespace WilFitApp.zPages
         {
             caloriesLabel.Content = $"Calories Consumed: {caloriesConsumed}";
         }
+        */
     }
 }

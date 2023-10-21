@@ -392,6 +392,31 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" Style="{StaticResource borderStyle_row2}" />
+                <Label x:Name="foodBarStat"
+                       Content="Value"
+                       
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="48,100"
+                       >
+                </Label>
+
+                <Label x:Name="foodBarLbl"
+                       Content ="Your Calories intake today: "
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="48,80"
+                       >
+                </Label>
+                <ProgressBar
+                x:Name="progress"
+                Height="30"
+                Width="200"
+                Margin="50,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Maximum="2500"
+                Foreground="{StaticResource MyGradientBrush}" />
                 <Border
                     Grid.Column="0"
                     Height="50"

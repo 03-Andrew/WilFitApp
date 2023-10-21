@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,6 +33,9 @@ namespace WilFitApp.zPages
             _name = name;
             greetLbl.Content = _name;
             SetLabels();
+            updateProgressBar();
+
+            SetLabel2();
         }
         public void SetLabels()
         {
@@ -52,8 +56,56 @@ namespace WilFitApp.zPages
                             activityLvl.Content = reader["ActivityLevel"].ToString();
                             recommendedWaterLbl.Content = reader["recommendedWater"].ToString() + "L";
                             caloriesLbl.Content = string.Format("{0:0.00}", Convert.ToDouble(reader["caloriesNeeded"]));
+                            
                         }
+                            
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions, such as displaying an error message or logging the error.
+            }
+        }
+
+        public void SetLabel2()
+        {
+            try
+            {
+
+                using (conn = con.getCon())
+                {
+                    conn.Open();
+                    string query2 = $"SELECT progressBarValue FROM progressBar";
+                    using (cmd = new SqlCommand(query2, conn))
+                    using (SqlDataReader reader2 = cmd.ExecuteReader())
+                    {
+
+                        if (reader2.Read())
+                        {
+                            foodBarStat.Content = reader2["progressBarValue"];
+                            
+                        }
+
+                    }
+                }
+            }catch (Exception ex) { }
+        }
+        public void updateProgressBar()
+        {
+            try
+            {
+                using (conn = con.getCon())
+                {
+                   
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT progressBarValue FROM progressBar;", conn);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && double.TryParse(result.ToString(), out double progressValue))
+                    {
+                        progress.Value = progressValue;
+                    }
+                    conn.Close();
                 }
             }
             catch (Exception ex)

@@ -53,7 +53,7 @@ namespace WilFitApp.zPages
 
                     adapter.Fill(dataTable);
 
-                    foodTable.ItemsSource = dataTable.DefaultView;
+                    foodTable1.ItemsSource = dataTable.DefaultView;
                 }
             }
             catch (Exception ex)
@@ -64,7 +64,7 @@ namespace WilFitApp.zPages
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchText = searchTxtBox.Text.ToLower();
+            string searchText = searchTxtBox1.Text.ToLower();
 
             // Use a DataView to filter the DataTable
             DataView dataView = dataTable.DefaultView;
@@ -81,7 +81,7 @@ namespace WilFitApp.zPages
             }
 
             // Update the DataGrid with the filtered data
-            foodTable.ItemsSource = dataView;
+            foodTable1.ItemsSource = dataView;
         }
     }
 }

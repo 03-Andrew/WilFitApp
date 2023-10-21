@@ -92,12 +92,12 @@ namespace WilFitApp
 
         private void WorkoutLog_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new zPages.WorkoutPage(_name);
+            MainFrame.Content = new zPages.DataGridPage(_name);
         }
 
         private void Workout_Btn_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new zPages.DataGridPage(_name);
+            MainFrame.Content = new zPages.WorkoutPage(_name);
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

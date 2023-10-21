@@ -11,7 +11,7 @@
     mc:Ignorable="d">
 
     <Border Background="Transparent" CornerRadius="20">
-   
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="51*" />
@@ -44,18 +44,18 @@
                 CornerRadius="20">
                 <Grid>
                     <Label
-                        x:Name="Name_Lbl2"
+                        x:Name="Name_Lbl1"
                         Margin="20,20,229,235"
                         Content="View Foods Table"
                         FontSize="20" />
                     <TextBox
-                        x:Name="searchTxtBox"
+                        x:Name="searchTxtBox1"
                         Height="30"
-                        Margin="256,25,47,235"
+                        Margin="256,19,47,241"
                         TextChanged="TextBox_TextChanged" />
                     <DataGrid
-                        x:Name="foodTable"
-                        Margin="10,70,10,10"
+                        x:Name="foodTable1"
+                        Margin="10,70,10,74"
                         AutoGenerateColumns="False"
                         CellStyle="{DynamicResource DataGridCellStyle1}"
                         ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
@@ -84,6 +84,11 @@
                                 Header="cal/serving size" />
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button Height="20" Margin="382,245,0,25" HorizontalAlignment="Left" Width="111"/>
+                    <TextBox Height="20" Margin="0,245,418,25" HorizontalAlignment="Right" Width="85"/>
+                    <TextBox Height="20" Margin="0,245,328,25" HorizontalAlignment="Right" Width="84"/>
+                    <TextBox Height="20" Margin="0,245,236,25" HorizontalAlignment="Right" Width="84"/>
+                    <TextBox Height="20" Margin="285,245,0,25" HorizontalAlignment="Left" Width="84"/>
                 </Grid>
 
             </Border>
@@ -115,7 +120,7 @@
                     FontSize="20"
                     FontWeight="SemiBold"
                     Text="Calorie Intake" />
-
+                
 
             </Border>
 

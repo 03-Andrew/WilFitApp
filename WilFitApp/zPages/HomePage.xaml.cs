@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -105,6 +105,23 @@ namespace WilFitApp.zPages
             catch (Exception ex) { }
         }
 
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+            using (SqlConnection conn = con.getCon())
+            {
+                conn.Open();
+  
+
+                    SqlCommand updateCmd = new SqlCommand($"UPDATE progressBar SET progressBarValue = {0};", conn);
+                    updateCmd.ExecuteNonQuery();
+
+                    conn.Close();
+
+                    updateProgressBar();
+                }
+            }
+        }
+
 
 
 
@@ -121,4 +138,4 @@ namespace WilFitApp.zPages
         }
         */
     }
-}
+

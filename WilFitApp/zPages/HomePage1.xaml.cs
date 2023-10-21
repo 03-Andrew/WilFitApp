@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,85 +18,51 @@ using WilFitApp.DataBase;
 namespace WilFitApp.zPages
 {
     /// <summary>
-    /// Interaction logic for HomePage1.xaml
+    /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class HomePage1 : Page
+    public partial class HomePage : Page
     {
+        private double caloriesConsumed = 0;
+        public HomePage()
+        {
+            InitializeComponent();
+            updateProgressBar();
+            SetLabel2();
+        }
         connection con = new connection();
         SqlConnection conn;
         SqlCommand cmd;
-        string _name;
-        public HomePage1(string name)
+        private void AddCalories_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-            _name = name;
-            greetLbl.Content = _name;
-            SetLabels();
-            updateProgressBar();
+            using (SqlConnection conn = con.getCon())
+            {
+                conn.Open();
 
-            SetLabel2();
-        }
-        public void SetLabels()
-        {
-            try
-            {
-                using (conn = con.getCon())
+                if (int.TryParse(caloriesInput.Text, out int newCalories))
                 {
-                    conn.Open();
-                    string query = $"SELECT weight, fullName, goalWeight, caloriesNeeded, recommendedWater, ActivityLevel FROM UserInfo WHERE userName = '{_name}'";
-                    using (cmd = new SqlCommand(query, conn))
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            weightLbl.Content = reader["weight"].ToString() + "kg";
-                            greetLbl.Content = "Hello " + reader["fullName"].ToString();
-                            goalWeightLbl.Content = reader["goalWeight"].ToString() + "kg";
-                            activityLvl.Content = reader["ActivityLevel"].ToString();
-                            recommendedWaterLbl.Content = reader["recommendedWater"].ToString() + "L";
-                            caloriesLbl.Content = string.Format("{0:0.00}", Convert.ToDouble(reader["caloriesNeeded"]));
-                            
-                        }
-                            
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle any exceptions, such as displaying an error message or logging the error.
+                    SqlCommand selectCmd = new SqlCommand("SELECT progressBarValue FROM progressBar;", conn);
+                    int currentValue = Convert.ToInt32(selectCmd.ExecuteScalar());
+
+                    int updatedValue = currentValue + newCalories;
+
+                    SqlCommand updateCmd = new SqlCommand($"UPDATE progressBar SET progressBarValue = {updatedValue};", conn);
+                    updateCmd.ExecuteNonQuery();
+
+                    conn.Close();
+
+                    updateProgressBar();                }
             }
         }
 
-        public void SetLabel2()
-        {
-            try
-            {
 
-                using (conn = con.getCon())
-                {
-                    conn.Open();
-                    string query2 = $"SELECT progressBarValue FROM progressBar";
-                    using (cmd = new SqlCommand(query2, conn))
-                    using (SqlDataReader reader2 = cmd.ExecuteReader())
-                    {
 
-                        if (reader2.Read())
-                        {
-                            foodBarStat.Content = reader2["progressBarValue"];
-                            
-                        }
-
-                    }
-                }
-            }catch (Exception ex) { }
-        }
         public void updateProgressBar()
         {
             try
             {
                 using (conn = con.getCon())
                 {
-                   
+
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("SELECT progressBarValue FROM progressBar;", conn);
                     object result = cmd.ExecuteScalar();
@@ -115,6 +80,62 @@ namespace WilFitApp.zPages
         }
 
 
+        public void SetLabel2()
+        {
+            try
+            {
 
+                using (conn = con.getCon())
+                {
+                    conn.Open();
+                    string query2 = $"SELECT progressBarValue FROM progressBar";
+                    using (cmd = new SqlCommand(query2, conn))
+                    using (SqlDataReader reader2 = cmd.ExecuteReader())
+                    {
+
+                        if (reader2.Read())
+                        {
+                            caloriesLabel.Content = "Your Calorie Intake: "+reader2["progressBarValue"];
+
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex) { }
+        }
+
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+            using (SqlConnection conn = con.getCon())
+            {
+                conn.Open();
+  
+
+                    SqlCommand updateCmd = new SqlCommand($"UPDATE progressBar SET progressBarValue = {0};", conn);
+                    updateCmd.ExecuteNonQuery();
+
+                    conn.Close();
+
+                    updateProgressBar();
+                }
+            }
+        }
+
+
+
+
+
+        /*
+        private void UpdateProgressBar()
+        {
+            progress.Value = caloriesConsumed;
+        }
+
+        private void UpdateCaloriesLabel()
+        {
+            caloriesLabel.Content = $"Calories Consumed: {caloriesConsumed}";
+        }
+        */
     }
-}
+

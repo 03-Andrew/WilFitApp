@@ -32,13 +32,14 @@ namespace WilFitApp.zPages
         connection con = new connection();
         SqlConnection conn;
         SqlCommand cmd;
+        public int newCalories;
         private void AddCalories_Click(object sender, RoutedEventArgs e)
         {
             using (SqlConnection conn = con.getCon())
             {
                 conn.Open();
 
-                if (int.TryParse(caloriesInput.Text, out int newCalories))
+                if (int.TryParse(caloriesInput.Text, out newCalories))
                 {
                     SqlCommand selectCmd = new SqlCommand("SELECT progressBarValue FROM progressBar;", conn);
                     int currentValue = Convert.ToInt32(selectCmd.ExecuteScalar());
@@ -95,7 +96,7 @@ namespace WilFitApp.zPages
 
                         if (reader2.Read())
                         {
-                            caloriesLabel.Content = "Your Calorie Intake: "+reader2["progressBarValue"];
+                            caloriesLabel.Content = reader2["progressBarValue"]+" cal";
 
                         }
 
@@ -120,7 +121,39 @@ namespace WilFitApp.zPages
                     updateProgressBar();
                 }
             }
+
+        private void BtnUndo_Click(object sender, RoutedEventArgs e)
+        {
+            using (SqlConnection conn = con.getCon())
+            {
+                conn.Open();
+                SqlCommand selectCmd = new SqlCommand("SELECT progressBarValue FROM progressBar;", conn);
+                int currentValue = Convert.ToInt32(selectCmd.ExecuteScalar());
+                SqlCommand updateCmd = new SqlCommand($"UPDATE progressBar SET progressBarValue = {currentValue-newCalories};", conn);
+                updateCmd.ExecuteNonQuery();
+                conn.Close();
+
+                updateProgressBar();
+            }
         }
+
+        private void EnterCaloriesTxtBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (caloriesInput.Text == " Enter your calories...")
+            {
+                caloriesInput.Text = "";
+            }
+        }
+
+        private void EnterCaloriesTxtBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(caloriesInput.Text))
+            {
+                caloriesInput.Text = " Enter your calories...";
+            }
+        }
+
+    }
 
 
 

@@ -239,12 +239,7 @@
 
     <Border Background="#eff2f7">
         <Grid Margin="0,10,10,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="44*" />
-                <ColumnDefinition Width="130*" />
-                <ColumnDefinition Width="658*" />
-                <ColumnDefinition Width="69*" />
-            </Grid.ColumnDefinitions>
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="203" />
                 <RowDefinition Height="437*" />
@@ -470,6 +465,20 @@
                                 VerticalAlignment="Top"
                                 Click="updateGoalWeight_Click"
                                 Content="Update" />
+                            <Label
+                                x:Name="goal"
+                                Height="26"
+                                Margin="172,25,10,0"
+                                VerticalAlignment="Top"
+                                HorizontalContentAlignment="Left"
+                                Content="HEHE" />
+                            <TextBlock
+                                Width="49"
+                                Height="20"
+                                Margin="150,29,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Text="Aim: " />
                         </Grid>
                     </Border>
 

@@ -20,8 +20,9 @@
     </Window.DataContext>
 
     <Border
+        x:Name="MainBorder"
         Background="#eff2f7"
-        CornerRadius="0"
+        CornerRadius="20"
         MouseDown="Border_MouseDown">
         <!--<Button Content="Button" HorizontalAlignment="Left" Margin="400,295,0,0" VerticalAlignment="Top" Click="Button_Click"/>-->
         <Grid>
@@ -30,28 +31,58 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="35*" />
+                <RowDefinition Height="685*" />
             </Grid.RowDefinitions>
             <Border
                 Grid.Row="0"
                 Grid.Column="0"
-                Background="LightGray" />
+                Background="LightGray"
+                CornerRadius="20 0 0 0"
+                MouseLeftButtonDown="Border_MouseLeftButtonDown" />
             <Border
                 Grid.Row="0"
                 Grid.Column="1"
-                Background="LightGray">
-                <Grid>
-                    <TextBlock Text="X" HorizontalAlignment="Left" FontWeight="SemiBold"  Margin="930,6,0,6" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Width="10"/>
+                Background="LightGray"
+                CornerRadius="0 20 0 0"
+                MouseLeftButtonDown="Border_MouseLeftButtonDown" />
 
-                </Grid>
 
-            </Border>
+
+            <Button
+                Grid.Column="1"
+                Width="25"
+                Height="24"
+                Margin="0,5,30,5"
+                HorizontalAlignment="Right"
+                HorizontalContentAlignment="Center"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Click="Button_Click_2"
+                Cursor="Hand"
+                FontSize="16"
+                Foreground="DarkGray">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse
+                                Margin="0,4,5,0"
+                                Fill="#ff605c"
+                                Stroke="#ff605c"
+                                StrokeThickness="2" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+
+            </Button>
+
+
+
             <Border
                 Grid.Row="1"
                 Margin="20"
-                CornerRadius="30"
-                MouseLeftButtonDown="Border_MouseLeftButtonDown"
+                CornerRadius="20"
                 Opacity="1">
                 <Border.Background>
 
@@ -61,6 +92,14 @@
                     </LinearGradientBrush>
 
                 </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect
+                        Direction="315"
+                        Opacity="0.5"
+                        ShadowDepth="3"
+                        Color="DarkGray" />
+
+                </Border.Effect>
                 <Grid>
                     <StackPanel>
 
@@ -144,8 +183,7 @@
                 x:Name="MainFrame"
                 Grid.Row="1"
                 Grid.Column="1"
-                Margin="0,20,20,20"
-   
+                Margin="0,0,20,20"
                 NavigationUIVisibility="Hidden" />
 
 

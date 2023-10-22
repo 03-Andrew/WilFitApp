@@ -86,9 +86,10 @@
                             Margin="0,0,0,15"
                             GotFocus="UserNameTxtBox_GotFocus"
                             LostFocus="UserNameTxtBox_LostFocus"
-                            Style="{StaticResource RoundedTextBoxStyle}">
-                            Username
-                        </TextBox>
+                            Text="Username"
+                            Style="{StaticResource RoundedTextBoxStyle}"/>
+
+
                         <PasswordBox
                             x:Name="PasswordTextBox"
                             Width="290"

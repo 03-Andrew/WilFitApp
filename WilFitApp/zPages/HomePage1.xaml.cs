@@ -26,6 +26,7 @@ namespace WilFitApp.zPages
         connection con = new connection();
         SqlConnection conn;
         SqlCommand cmd;
+        SqlDataReader reader;
         string _name;
         public HomePage1(string name)
         {
@@ -46,7 +47,7 @@ namespace WilFitApp.zPages
                     conn.Open();
                     string query = $"SELECT weight, fullName, goalWeight, caloriesNeeded, recommendedWater, ActivityLevel FROM UserInfo WHERE userName = '{_name}'";
                     using (cmd = new SqlCommand(query, conn))
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -78,12 +79,12 @@ namespace WilFitApp.zPages
                     conn.Open();
                     string query2 = $"SELECT progressBarValue FROM progressBar";
                     using (cmd = new SqlCommand(query2, conn))
-                    using (SqlDataReader reader2 = cmd.ExecuteReader())
+                    using (reader = cmd.ExecuteReader())
                     {
 
-                        if (reader2.Read())
+                        if (reader.Read())
                         {
-                            foodBarStat.Content = reader2["progressBarValue"];
+                            foodBarStat.Content = reader["progressBarValue"];
                             
                         }
 
@@ -99,11 +100,11 @@ namespace WilFitApp.zPages
                 {
                    
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT progressBarValue FROM progressBar;", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT calories FROM calorieHistory;", conn);
                     object result = cmd.ExecuteScalar();
                     if (result != null && double.TryParse(result.ToString(), out double progressValue))
                     {
-                        progress.Value = progressValue;
+                       calorieProgressBar.Value = progressValue;
                     }
                     conn.Close();
                 }

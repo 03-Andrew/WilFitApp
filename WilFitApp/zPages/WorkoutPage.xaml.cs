@@ -33,13 +33,18 @@ namespace WilFitApp.zPages
 
         public WorkoutPage(string name)
         {
-
-            InitializeComponent();
-            addData();
-            MyComboBox.SelectedItem = MyComboBox.Items[0];
-            _name = name;
-            LoadDataIntoDataGrid();
-            setLable();
+            try
+            {
+                InitializeComponent();
+                addData();
+                MyComboBox.SelectedItem = MyComboBox.Items[0];
+                _name = name;
+                LoadDataIntoDataGrid();
+                setLable();
+            }
+            catch (Exception e){
+                MessageBox.Show("" + e);
+            }
         }
         public void addData()
         {
@@ -172,7 +177,7 @@ namespace WilFitApp.zPages
             using (conn = con.getCon())
             {
                 conn.Open();
-                string query = $"SELECT weight, goalWeight FROM UserInfo WHERE userName = '{_name}'";
+                string query = $"SELECT weight, goalWeight, goal FROM UserInfo WHERE userName = '{_name}'";
                 using (cmd = new SqlCommand(query, conn))
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -180,6 +185,7 @@ namespace WilFitApp.zPages
                     {
                         currWeightLbl.Content = reader["weight"].ToString() + "kg";
                         goalWeightLbl.Content = reader["goalWeight"].ToString() + "kg";
+                        goal.Content = reader["goal"].ToString();
                         
                     }
                 }
@@ -217,6 +223,7 @@ namespace WilFitApp.zPages
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Success");
                         setLable();
+                        newWeight.Text = "";
                     }
                 }
                
@@ -244,6 +251,7 @@ namespace WilFitApp.zPages
                         {
                             MessageBox.Show("Weight updated successfully.");
                             setLable();
+                            newGoalWeight.Text = "";
                         }
                         else
                         {

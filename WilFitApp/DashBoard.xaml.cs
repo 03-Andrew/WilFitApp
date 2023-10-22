@@ -31,7 +31,7 @@ namespace WilFitApp
             HomeView homeView = new HomeView();
             homeView.SetLabelText(name);
             _name = name;
-            MainFrame.Content = new zPages.HomePage();
+            MainFrame.Content = new zPages.HomePage1(_name);
             //homeViewContainer.Content = homeView;
         }
 
@@ -60,12 +60,13 @@ namespace WilFitApp
                     this.WindowState = WindowState.Normal;
                     this.Width = 1080;
                     this.Height = 720;
-
+                    MainBorder.CornerRadius = new CornerRadius(20);
                     IsMaximized = false;
                 }
                 else
                 {
                     this.WindowState = WindowState.Maximized;
+                    MainBorder.CornerRadius = new CornerRadius(0);
                     IsMaximized = true;
                     
 
@@ -92,7 +93,7 @@ namespace WilFitApp
 
         private void WorkoutLog_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new zPages.DataGridPage(_name);
+            MainFrame.Content = new zPages.HomePage(_name);
         }
 
         private void Workout_Btn_Click(object sender, RoutedEventArgs e)
@@ -100,9 +101,12 @@ namespace WilFitApp
             MainFrame.Content = new zPages.WorkoutPage(_name);
         }
 
-        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
+        
     }
 }

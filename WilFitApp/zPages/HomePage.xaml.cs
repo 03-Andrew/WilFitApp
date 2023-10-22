@@ -23,34 +23,51 @@ namespace WilFitApp.zPages
     public partial class HomePage : Page
     {
         private double caloriesConsumed = 0;
-        public HomePage()
+        connection con = new connection();
+        SqlConnection conn;
+        SqlCommand cmd;
+        string _name;
+        public HomePage(string name)
         {
             InitializeComponent();
             updateProgressBar();
             SetLabel2();
+            _name = name;
         }
-        connection con = new connection();
-        SqlConnection conn;
-        SqlCommand cmd;
+        
         private void AddCalories_Click(object sender, RoutedEventArgs e)
         {
-            using (SqlConnection conn = con.getCon())
+            try
             {
-                conn.Open();
-
-                if (int.TryParse(caloriesInput.Text, out int newCalories))
+                using (SqlConnection conn = con.getCon())
                 {
-                    SqlCommand selectCmd = new SqlCommand("SELECT progressBarValue FROM progressBar;", conn);
-                    int currentValue = Convert.ToInt32(selectCmd.ExecuteScalar());
+                    conn.Open();
 
-                    int updatedValue = currentValue + newCalories;
+                    if (double.TryParse(caloriesInput.Text, out double newCalories))
+                    {
+                        // Use a parameterized query to prevent SQL injection
+                        SqlCommand selectCmd = new SqlCommand($"SELECT calories FROM calorieHistory WHERE userName = '{_name}'", conn);
+                        
 
-                    SqlCommand updateCmd = new SqlCommand($"UPDATE progressBar SET progressBarValue = {updatedValue};", conn);
-                    updateCmd.ExecuteNonQuery();
+                        double currentValue = Convert.ToDouble(selectCmd.ExecuteScalar());
 
-                    conn.Close();
+                        double updatedValue = currentValue + newCalories;
+                        DateTime currDate = DateTime.Now;
 
-                    updateProgressBar();                }
+                        // Fix the syntax error and use a parameterized query
+                        SqlCommand updateCmd = new SqlCommand($"UPDATE calorieHistory SET calories = {updatedValue} WHERE userName = '{_name}'", conn);
+                        updateCmd.ExecuteNonQuery();
+
+                        conn.Close();
+
+                        updateProgressBar();
+                        SetLabel2();
+                    }
+                }
+            } 
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error: " + ex);
             }
         }
 
@@ -60,24 +77,27 @@ namespace WilFitApp.zPages
         {
             try
             {
-                using (conn = con.getCon())
+                using (SqlConnection conn = con.getCon())
                 {
-
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT progressBarValue FROM progressBar;", conn);
+                    SqlCommand cmd = new SqlCommand($"SELECT calories FROM calorieHistory WHERE userName = '{_name}'", conn);
+                    
+
                     object result = cmd.ExecuteScalar();
+
                     if (result != null && double.TryParse(result.ToString(), out double progressValue))
                     {
                         progress.Value = progressValue;
                     }
-                    conn.Close();
                 }
             }
             catch (Exception ex)
             {
                 // Handle any exceptions, such as displaying an error message or logging the error.
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
+
 
 
         public void SetLabel2()
@@ -88,14 +108,14 @@ namespace WilFitApp.zPages
                 using (conn = con.getCon())
                 {
                     conn.Open();
-                    string query2 = $"SELECT progressBarValue FROM progressBar";
+                    string query2 = $"SELECT calories FROM calorieHistory WHERE userName = '{_name}'";
                     using (cmd = new SqlCommand(query2, conn))
-                    using (SqlDataReader reader2 = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
 
-                        if (reader2.Read())
+                        if (reader.Read())
                         {
-                            caloriesLabel.Content = "Your Calorie Intake: "+reader2["progressBarValue"];
+                            caloriesLabel.Content = "Your Calorie Intake: "+reader["calories"];
 
                         }
 

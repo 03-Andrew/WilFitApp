@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using WilFitApp.DataBase;
 using System.Data;
 using System.Data.Sql;
+using System.Xml.Linq;
 
 namespace WilFitApp
 {
@@ -76,6 +77,7 @@ namespace WilFitApp
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             getUserInfo();
+            addToCalorieHistory();
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
@@ -108,6 +110,7 @@ namespace WilFitApp
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
+            
         }
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
@@ -126,7 +129,7 @@ namespace WilFitApp
               
                 double weight = Convert.ToDouble(weight_txtBox.Text);
                 double weightG = Convert.ToDouble(aimedWright_txtBox.Text);
-                string goal = weight < weightG ? "gain" : "lose";
+                //string goal = weight < weightG ? "gain" : "lose";
                 double height = Convert.ToDouble(height_txtBox.Text);
                
                 double waterIntake = weight * 0.033;
@@ -180,9 +183,12 @@ namespace WilFitApp
                         }
                         else
                         {
+                            string query = $"INSERT INTO UserInfo (fullName, userName, password, age, gender, " +
+                                $"weight, goalWeight, height, caloriesNeeded, recommendedWater, activityLevel)" +
+                                $" VALUES('{fullName}', '{userName}', '{password}', {age}, '{gender}', {weight}, " +
+                                $"{weightG}, {height} ,{caloriesNeeded}, {waterIntake}, '{selectedLevel}')";
                             //Store values in the database
-                            using (SqlCommand cmd = new SqlCommand($"INSERT INTO UserInfo VALUES('{fullName}', '{userName}', '{password}', {age}, '{gender}', {weight}, " +
-                                            $"{weightG}, {height} ,{caloriesNeeded}, {waterIntake}, '{selectedLevel}', '{goal}')", conn))
+                            using (SqlCommand cmd = new SqlCommand(query, conn))
                             {
                                 cmd.ExecuteNonQuery();
                             }
@@ -207,6 +213,36 @@ namespace WilFitApp
             }
             return 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age);
         }
+        private void addToCalorieHistory()
+        {
+            try
+            {
+                using (SqlConnection conn = con.getCon())
+                {
+                    conn.Open();
+
+                    // Get the current time and date
+                    DateTime currentDate = DateTime.Now;
+
+                    // Set the initial calories value to 0
+                    int initialCalories = 0;
+
+                    // Use a parameterized query to insert the data into the table
+                    SqlCommand cmd = new SqlCommand("INSERT INTO calorieHistory (inputDate, userName, calories) VALUES (@Timestamp, @UserName, @Calories)", conn);
+                    cmd.Parameters.AddWithValue("@Timestamp", currentDate);
+                    cmd.Parameters.AddWithValue("@UserName", username_txtBox.Text);
+                    cmd.Parameters.AddWithValue("@Calories", initialCalories);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions, such as displaying an error message or logging the error.
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
     }
 }
 

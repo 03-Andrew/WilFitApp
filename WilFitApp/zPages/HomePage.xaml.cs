@@ -48,6 +48,9 @@ namespace WilFitApp.zPages
                 updateProgressBar();
                 updateWaterProgressBar();
                 LoadDataIntoDataGrid();
+                SetLabel4();
+                SetLabel5();
+
             } catch(Exception ex)
             {
                 MessageBox.Show("" + ex);
@@ -504,7 +507,73 @@ namespace WilFitApp.zPages
             catch (Exception ex) { }
         }
 
-        
+        //How much to consume
+        public void SetLabel4()
+        {
+            try
+            {
+                using (conn)
+                using (conn = con.getCon())
+                {
+                    conn.Open();
+                    string query2 = $"SELECT caloriesNeeded FROM UserInfo where userName = '{_name}';";
+                    using (cmd = new SqlCommand(query2, conn))
+                    using (SqlDataReader reader2 = cmd.ExecuteReader())
+                    {
+
+                        if (reader2.Read())
+                        {
+                            double calToMultiply = Convert.ToInt32(reader2["caloriesNeeded"]);
+                            maintainWeightLbl.Content = reader2["caloriesNeeded"];
+                            
+                            //weight loss labels
+                            mildWeightLoss.Content = calToMultiply*0.90;
+
+                            weightLoss.Content = calToMultiply * 0.79;
+
+                            extremeWeightLoss.Content = calToMultiply * 0.59;
+
+                            // weight gain labels
+
+                            mildWeightGain.Content = calToMultiply * 1.10;
+
+                            weightGain.Content = calToMultiply * 1.21;
+
+                            extremeWeightGain.Content = calToMultiply * 1.41;
+
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { }
+        }
+
+        public void SetLabel5()
+        {
+            try
+            {
+                using (conn)
+                using (conn = con.getCon())
+                {
+                    conn.Open();
+                    string query2 = $"SELECT weight FROM UserInfo where userName = '{_name}';";
+                    using (cmd = new SqlCommand(query2, conn))
+                    using (SqlDataReader reader2 = cmd.ExecuteReader())
+                    {
+
+                        if (reader2.Read())
+                        {
+                            currentWeightLbl.Content = reader2["weight"] + " kg";
+
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { }
+        }
+
 
 
 

@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WilFitApp.zPages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
     Title="HomePage"
     d:DesignHeight="660"
     d:DesignWidth="910"
@@ -778,7 +779,7 @@
                         Margin="80,70,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Content="2500 cal"
+                        Content="0 cal"
                         FontSize="25"
                         FontWeight="SemiBold"
                         Foreground="{StaticResource MyGradientBrush2}">
@@ -1070,7 +1071,7 @@
                         Margin="80,70,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Content="2000 ml"
+                        Content="0 ml"
                         FontSize="25"
                         FontWeight="SemiBold"
                         Foreground="{StaticResource MyGradientBrush3}">
@@ -1137,47 +1138,298 @@
                                 Margin="5,0,0,0"
                                 FontSize="16"
                                 FontWeight="SemiBold"
-                                Foreground="Gray"
+                                Foreground="#111111"
                                 Text="Lose weight" />
                             <TextBlock
-                                Margin="100,0,0,0"
+                                Margin="60,0,0,0"
                                 FontSize="16"
                                 FontWeight="SemiBold"
-                                Foreground="Gray"
-                                Text="Maintain weight" />
-                            <TextBlock
-                                Margin="90,0,0,0"
-                                FontSize="16"
-                                FontWeight="SemiBold"
-                                Foreground="Gray"
+                                Foreground="#111111"
                                 Text="Gain weight" />
+                            <TextBlock
+                                Margin="63,0,0,0"
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="#111111"
+                                Text="Maintain weight" />
                         </StackPanel>
-                        <Grid Height="82">
-                            <Label
+                        <!--Label-->
+                        <Grid Height="172">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="91*"/>
+                                <ColumnDefinition Width="97*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label x:Name="maintainWeightLbl"
                                 Width="54"
-                                Margin="224,-6,0,26"
+                                Margin="49,-6,0,142"
                                 HorizontalAlignment="Left"
                                 Content="2425"
                                 FontSize="18"
                                 FontWeight="SemiBold"
-                                Foreground="Gray" />
+                                Foreground="#2A2A2A" Grid.Column="1" />
                             <Label
                                 Width="54"
-                                Margin="267,1,0,26"
+                                Margin="91,1,0,142"
                                 HorizontalAlignment="Left"
                                 Content="100%"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                Foreground="Gray" Grid.Column="1" />
+                            <Label
+                                Width="84"
+                                Margin="49,14,0,113"
+                                HorizontalAlignment="Left"
+                                Content="Calories/Day"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                Foreground="Gray" Grid.Column="1" />
+                            <Label x:Name="mildWeightLoss"
+                                Width="54"
+                                Margin="29,-6,0,26"
+                                HorizontalAlignment="Left"
+                                Content="2425"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Foreground="#2A2A2A" />
+                            <Label
+                                Width="54"
+                                Margin="72,0,0,27"
+                                HorizontalAlignment="Left"
+                                Content="90%"
                                 FontSize="12"
                                 FontWeight="SemiBold"
                                 Foreground="Gray" />
                             <Label
                                 Width="85"
-                                Margin="224,14,0,12"
+                                Margin="29,14,0,12"
                                 HorizontalAlignment="Left"
                                 Content="Calories/Day"
                                 FontSize="12"
                                 FontWeight="SemiBold"
                                 Foreground="Gray" />
+                            <Label
+                                Width="85"
+                                Margin="29,28,0,30"
+                                HorizontalAlignment="Left"
+                                Content="lose 0.25kg a week"
+                                FontSize="7"
+                                FontWeight="SemiBold"
+                                FontStyle="Italic"
+                                Foreground="Gray" />
+                            <Label x:Name="weightLoss"
+                                Width="54"
+                                Margin="29,44,0,-24"
+                                HorizontalAlignment="Left"
+                                Content="2425"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Foreground="#2A2A2A" />
+                            <Label
+                                Width="54"
+                                Margin="72,50,0,-24"
+                                HorizontalAlignment="Left"
+                                Content="79%"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                Foreground="Gray" />
+                            <Label
+                                Width="85"
+                                Margin="29,64,0,-38"
+                                HorizontalAlignment="Left"
+                                Content="Calories/Day"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                Foreground="Gray" />
+                            <Label
+                                Width="85"
+                                Margin="29,78,0,-20"
+                                HorizontalAlignment="Left"
+                                Content="lose 0.5kg a week"
+                                FontSize="7"
+                                FontWeight="SemiBold"
+                                FontStyle="Italic"
+                                Foreground="Gray" />
+                            <Label x:Name="extremeWeightLoss"
+                                Width="54"
+                                Margin="29,95,0,-75"
+                                HorizontalAlignment="Left"
+                                Content="2425"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Foreground="#2A2A2A" />
+                            <Label
+                                Width="54"
+                                Margin="72,101,0,-75"
+                                HorizontalAlignment="Left"
+                                Content="59%"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                Foreground="Gray" />
+                            <Label
+                                Width="85"
+                                Margin="29,115,0,-89"
+                                HorizontalAlignment="Left"
+                                Content="Calories/Day"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                Foreground="Gray" />
+                            <Label
+                                Width="85"
+                                Margin="29,129,0,-71"
+                                HorizontalAlignment="Left"
+                                Content="lose 1kg a week"
+                                FontSize="7"
+                                FontWeight="SemiBold"
+                                FontStyle="Italic"
+                                Foreground="Gray" />
+                            <Label x:Name="mildWeightGain"
+                                Width="54"
+                                Margin="170,-6,0,144"
+                                HorizontalAlignment="Left"
+                                Content="2425"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Foreground="#2A2A2A" />
+                            <Label
+                                Width="54"
+                                Margin="213,0,0,144"
+                                HorizontalAlignment="Left"
+                                Content="110%"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                Foreground="Gray" />
+                            <Label
+                                Width="85"
+                                Margin="170,14,0,126"
+                                HorizontalAlignment="Left"
+                                Content="Calories/Day"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                Foreground="Gray" />
+                            <Label
+                                Width="85"
+                                Margin="170,28,0,120"
+                                HorizontalAlignment="Left"
+                                Content="gain 0.25kg a week"
+                                FontSize="7"
+                                FontWeight="SemiBold"
+                                FontStyle="Italic"
+                                Foreground="Gray" />
+                            <Label x:Name="weightGain"
+                                Width="54"
+                                Margin="170,46,0,76"
+                                HorizontalAlignment="Left"
+                                Content="2425"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Foreground="#2A2A2A" />
+                            <Label
+                                Width="54"
+                                Margin="213,52,0,82"
+                                HorizontalAlignment="Left"
+                                Content="121%"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                Foreground="Gray" />
+                            <Label
+                                Width="85"
+                                Margin="170,66,0,71"
+                                HorizontalAlignment="Left"
+                                Content="Calories/Day"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                Foreground="Gray" />
+                            <Label
+                                Width="85"
+                                Margin="170,80,0,71"
+                                HorizontalAlignment="Left"
+                                Content="gain 0.5kg a week"
+                                FontSize="7"
+                                FontWeight="SemiBold"
+                                FontStyle="Italic"
+                                Foreground="Gray" />
+                            <Label x:Name="extremeWeightGain"
+                                Width="54"
+                                Margin="170,95,0,26"
+                                HorizontalAlignment="Left"
+                                Content="2425"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Foreground="#2A2A2A" />
+                            <Label
+                                Width="54"
+                                Margin="213,101,0,10"
+                                HorizontalAlignment="Left"
+                                Content="141%"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                Foreground="Gray" />
+                            <Label
+                                Width="85"
+                                Margin="170,115,0,26"
+                                HorizontalAlignment="Left"
+                                Content="Calories/Day"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                Foreground="Gray" />
+                            <Label
+                                Width="85"
+                                Margin="170,129,0,12"
+                                HorizontalAlignment="Left"
+                                Content="gain 1kg a week"
+                                FontSize="7"
+                                FontWeight="SemiBold"
+                                FontStyle="Italic"
+                                Foreground="Gray" />
+
+                            <Label x:Name="maintainWeightLbl_Copy"
+                                Width="124"
+                                Content="WilFit"
+                                FontSize="25"
+                                FontWeight="Bold"
+                                Foreground="{StaticResource MyGradientBrush}" Margin="164,108,3,5" Grid.Column="1" />
+
+                            <Label x:Name="slogan"
+                                Content="Your fitness journey starts here!"
+                                FontSize="8"
+                                FontWeight="Normal"
+                                Foreground="{StaticResource MyGradientBrush}" Margin="162,135,-22,4" Grid.Column="1" />
+
+                            <Icon:PackIconMaterial
+                                Width="26"
+                                Height="19"
+                                Margin="239,121,0,0"
+                                Foreground="{StaticResource MyGradientBrush}"
+                                Kind="Dumbbell"
+                                Visibility="Visible" Grid.Column="1" />
+                            <Label
+                                Width="111"
+                                Margin="49,28,0,120"
+                                HorizontalAlignment="Left"
+                                Content="maintiain your current weight&#xD;&#xA;"
+                                FontSize="7"
+                                FontWeight="SemiBold"
+                                FontStyle="Italic"
+                                Foreground="Gray" Grid.Column="1" />
+                            <Label x:Name="currentWeightTitle"
+                                Width="183"
+                                Margin="41,46,0,76"
+                                HorizontalAlignment="Left"
+                                Content="Your current weight:"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Foreground="#2A2A2A" Grid.Column="1" />
+                            <Label x:Name="currentWeightLbl"
+                                Width="183"
+                                Margin="41,66,0,56"
+                                HorizontalAlignment="Left"
+                                Content="0kg"
+                                FontSize="30"
+                                FontWeight="SemiBold"
+                                Foreground="#2A2A2A" Grid.Column="1" />
                         </Grid>
+
+
 
                     </StackPanel>
 

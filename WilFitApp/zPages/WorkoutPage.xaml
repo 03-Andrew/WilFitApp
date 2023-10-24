@@ -366,7 +366,7 @@
                             <TextBox
                                 x:Name="descriptionTxtBox"
                                 Width="350"
-                                Margin="20,0,20,0" />
+                                Margin="20,0,25,0" />
                             <Button
                                 x:Name="enterLog"
                                 Width="100"

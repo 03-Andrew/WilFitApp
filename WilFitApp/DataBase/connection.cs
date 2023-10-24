@@ -14,7 +14,7 @@ namespace WilFitApp.DataBase
         SqlConnection conn;
         public SqlConnection getCon()
         {
-            conn = new SqlConnection("Data Source=smellycat\\SQLEXPRESS;Initial Catalog=WilFitApp;Integrated Security=True");
+            conn = new SqlConnection("Data Source=LAPTOP-KUFQMU26\\SQLEXPRESS;Initial Catalog=WilFitApp;Integrated Security=True");
             return conn;
         }
     }

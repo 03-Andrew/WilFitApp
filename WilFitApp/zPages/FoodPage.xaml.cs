@@ -34,7 +34,7 @@ namespace WilFitApp.zPages
         public FoodPage(String name)
         {
             InitializeComponent();
-            Name_Lbl.Content = name;
+            //Name_Lbl.Content = name;
             LoadDataIntoDataGrid();
         }
         private void LoadDataIntoDataGrid()
@@ -82,6 +82,28 @@ namespace WilFitApp.zPages
 
             // Update the DataGrid with the filtered data
             foodTable1.ItemsSource = dataView;
+        }
+
+        private void addFoodBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Foods food = new Foods();
+            food.name = foodTxtBox.Text;
+            food.measurment = measurementTxtBox.Text;
+            food.servingSize  = Convert.ToDouble(servingSizeTxtBox.Text);
+            food.calPerServing = Convert.ToDouble(calPerServingTxtBox.Text);
+
+            using (conn = con.getCon())
+            {
+                conn.Open();
+                string query = $"insert into FoodData values('{food.name}', {food.servingSize}, '{food.measurment}', {food.calPerServing})";
+                using (cmd = new SqlCommand(query, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Success");
+                    LoadDataIntoDataGrid();
+                  
+                }
+            }
         }
     }
 }

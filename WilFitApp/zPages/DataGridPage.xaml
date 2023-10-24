@@ -68,14 +68,16 @@
             <TextBox x:Name="FoodTxtBox" Height="30" Margin="102,115,556,305"/>
             <Button x:Name="checkTableBtn" Height="30" Width="100" Content="Check database" Margin="123,164,577,256" Click="checkTableBtn_Click"/>
             <Button x:Name="addCalorriesBtn" Content="Add caloies" Height="30" Width="100" Margin="320,205,380,215" />
-            <Label x:Name="caloriesAmountLbl" Content="Amount of calories" Height="30" Width="150" Margin="299,161,351,259"/>
+            <Label x:Name="caloriesAmountLbl" Content="Amount of calories" Height="30" Width="150" Margin="52,253,598,167"/>
             <DataGrid
                 x:Name="Foods"
                 Margin="469,56,81,179"
                 AutoGenerateColumns="True"
                 ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}"
                 IsReadOnly="True" />
-            
+            <Label x:Name="foodName" Content="food" Height="30" Width="150" Margin="52,296,598,124"/>
+            <Label x:Name="calories" Content="food" Height="30" Width="150" Margin="52,326,598,94"/>
+
         </Grid>
 
 

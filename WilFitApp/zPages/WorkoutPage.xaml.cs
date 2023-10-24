@@ -138,8 +138,6 @@ namespace WilFitApp.zPages
             return category;
         }
 
-       
-
         private bool ValidateTimeInput()
         {
             string input = timeTxtBox.Text;
@@ -348,7 +346,6 @@ namespace WilFitApp.zPages
 
         }
         
-
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             if(type == null)
@@ -441,8 +438,7 @@ namespace WilFitApp.zPages
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-
-        
+ 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             DateTime? selectedDate = datePicker.SelectedDate;  // Use nullable DateTime to handle null selection
@@ -492,7 +488,6 @@ namespace WilFitApp.zPages
 
         }
         
-
         private void clearEntries()
         {
             MyComboBox.SelectedItem = MyComboBox.Items[0];
@@ -503,7 +498,6 @@ namespace WilFitApp.zPages
             otherTxtBox.Text = "";
             descriptionTxtBox.Text = "";
         }
-
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {

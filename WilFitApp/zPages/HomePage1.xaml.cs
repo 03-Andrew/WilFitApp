@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,7 +18,7 @@ using WilFitApp.DataBase;
 namespace WilFitApp.zPages
 {
     /// <summary>
-    /// Interaction logic for HomePage1.xaml
+    /// Interaction logic for HomePage.xaml
     /// </summary>
     public partial class HomePage1 : Page
     {
@@ -57,9 +56,9 @@ namespace WilFitApp.zPages
                             activityLvl.Content = reader["ActivityLevel"].ToString();
                             recommendedWaterLbl.Content = reader["recommendedWater"].ToString() + "L";
                             caloriesLbl.Content = string.Format("{0:0.00}", Convert.ToDouble(reader["caloriesNeeded"]));
-                            
+
                         }
-                            
+
                     }
                 }
             }
@@ -85,12 +84,13 @@ namespace WilFitApp.zPages
                         if (reader.Read())
                         {
                             foodBarStat.Content = reader["progressBarValue"];
-                            
+
                         }
 
                     }
                 }
-            }catch (Exception ex) { }
+            }
+            catch (Exception ex) { }
         }
         public void updateProgressBar()
         {
@@ -98,13 +98,13 @@ namespace WilFitApp.zPages
             {
                 using (conn = con.getCon())
                 {
-                   
+
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("SELECT calories FROM calorieHistory;", conn);
                     object result = cmd.ExecuteScalar();
                     if (result != null && double.TryParse(result.ToString(), out double progressValue))
                     {
-                       calorieProgressBar.Value = progressValue;
+                        calorieProgressBar.Value = progressValue;
                     }
                     conn.Close();
                 }
@@ -115,7 +115,10 @@ namespace WilFitApp.zPages
             }
         }
 
-
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
+

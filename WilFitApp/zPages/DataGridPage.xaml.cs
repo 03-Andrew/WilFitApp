@@ -55,17 +55,29 @@ namespace WilFitApp.zPages
             using (conn = con.getCon())
             {
                 conn.Open();
-                string query = $"SELECT measurement FROM FoodData where foodName = '{food}'";
+                string query = "SELECT * FROM FoodData WHERE foodName = @foodName";
                 using (cmd = new SqlCommand(query, conn))
-                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    if (reader.Read())
+                    cmd.Parameters.AddWithValue("@foodName", food);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        inputTypeLbl.Content = "Enter amount in " + reader["measurement"].ToString();
+                        if (reader.Read())
+                        {
+                            inputTypeLbl.Content = "Enter amount in " + reader["measurement"].ToString();
+                            foodName.Content = reader["foodName"].ToString();
+                            calories.Content = reader["calPerServing"].ToString();
+                        }
+                        else
+                        {
+                            // Display a message box when the information is not found
+                            MessageBox.Show("Food not found in the database.");
+                        }
                     }
                 }
             }
         }
+
     }
-   
+
 }

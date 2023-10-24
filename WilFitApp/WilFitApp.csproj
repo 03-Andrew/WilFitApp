@@ -213,6 +213,8 @@
     <Compile Include="LoggedIn.xaml.cs">
       <DependentUpon>LoggedIn.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Model\calorieHistory.cs" />
+    <Compile Include="MVVM\Model\Foods.cs" />
     <Compile Include="MVVM\Model\LogInInfo.cs" />
     <Compile Include="MVVM\Model\WorkoutLog.cs" />
     <Compile Include="MVVM\ViewModel\FoodViewModel.cs" />
@@ -242,6 +244,9 @@
     </Compile>
     <Compile Include="zPages\FoodPage.xaml.cs">
       <DependentUpon>FoodPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="zPages\FoodPage1.xaml.cs">
+      <DependentUpon>FoodPage1.xaml</DependentUpon>
     </Compile>
     <Compile Include="zPages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -308,6 +313,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="zPages\FoodPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="zPages\FoodPage1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

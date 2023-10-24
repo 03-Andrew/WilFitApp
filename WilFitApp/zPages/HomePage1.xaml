@@ -13,8 +13,8 @@
 
     <Page.Resources>
         <LinearGradientBrush x:Key="MyGradientBrush" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#30ad9a" Offset="0"/>
-            <GradientStop Color="#16c274" Offset="1"/>
+            <GradientStop Offset="0" Color="#30ad9a" />
+            <GradientStop Offset="1" Color="#16c274" />
         </LinearGradientBrush>
         <Style x:Key="borderStyle_row2" TargetType="Border">
             <Setter Property="Background" Value="White" />
@@ -36,67 +36,91 @@
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                        <Rectangle
+                            Margin="2"
+                            SnapsToDevicePixels="true"
+                            Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                            StrokeDashArray="1 2"
+                            StrokeThickness="1" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
-        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
         <Style x:Key="homeWorkoutBtn" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="20"
+                            SnapsToDevicePixels="true">
+                            <ContentPresenter
+                                x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Focusable="False"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                             </Trigger>
 
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" To="10,10,20,10" Duration="0:0:0.3"/>
+                                            <ThicknessAnimation
+                                                Storyboard.TargetProperty="Margin"
+                                                To="10,10,20,10"
+                                                Duration="0:0:0.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
                                 <Trigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" To="20,20,20,10" Duration="0:0:0.3"/>
+                                            <ThicknessAnimation
+                                                Storyboard.TargetProperty="Margin"
+                                                To="20,20,20,10"
+                                                Duration="0:0:0.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.ExitActions>
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource MyGradientBrush}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource MyGradientBrush}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.MouseOver.Border}" />
                             </Trigger>
 
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Pressed.Background}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Pressed.Border}" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{StaticResource Button.Disabled.Foreground}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -107,70 +131,96 @@
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                        <Rectangle
+                            Margin="2"
+                            SnapsToDevicePixels="true"
+                            Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                            StrokeDashArray="1 2"
+                            StrokeThickness="1" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background1" Color="#FFDDDDDD"/>
-        <SolidColorBrush x:Key="Button.Static.Border1" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background1" Color="#FFBEE6FD"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border1" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background1" Color="#FFC4E5F6"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border1" Color="#FF2C628B"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background1" Color="#FFF4F4F4"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border1" Color="#FFADB2B5"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground1" Color="#FF838383"/>
+        <SolidColorBrush x:Key="Button.Static.Background1" Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border1" Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background1" Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border1" Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background1" Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border1" Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background1" Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border1" Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground1" Color="#FF838383" />
         <Style x:Key="homeFoodBtn" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual1}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background1}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border1}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual1}" />
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background1}" />
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border1}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="20"
+                            SnapsToDevicePixels="true">
+                            <ContentPresenter
+                                x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Focusable="False"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" To="10,5,20,20" Duration="0:0:0.3"/>
+                                            <ThicknessAnimation
+                                                Storyboard.TargetProperty="Margin"
+                                                To="10,5,20,20"
+                                                Duration="0:0:0.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
                                 <Trigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <ThicknessAnimation Storyboard.TargetProperty="Margin" To="20,10,20,20" Duration="0:0:0.3"/>
+                                            <ThicknessAnimation
+                                                Storyboard.TargetProperty="Margin"
+                                                To="20,10,20,20"
+                                                Duration="0:0:0.3" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.ExitActions>
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource MyGradientBrush}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border1}"/>
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource MyGradientBrush}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.MouseOver.Border1}" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background1}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border1}"/>
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Pressed.Background1}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Pressed.Border1}" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background1}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border1}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground1}"/>
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Disabled.Background1}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Disabled.Border1}" />
+                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{StaticResource Button.Disabled.Foreground1}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
+
         </Style>
     </Page.Resources>
 
@@ -193,8 +243,11 @@
                         <RowDefinition Height="190" />
                     </Grid.RowDefinitions>
 
-                    <!--Workout Button-->
-                    <Border  CornerRadius="20" Margin="20,20,20,10" Background="White">
+                    <!--  Workout Button  -->
+                    <Border
+                        Margin="20,20,20,10"
+                        Background="White"
+                        CornerRadius="20">
 
                         <Border.Effect>
                             <DropShadowEffect
@@ -205,23 +258,39 @@
                         </Border.Effect>
                     </Border>
 
-                    <Button Style="{DynamicResource homeWorkoutBtn}" Margin="20,20,20,10" 
-                            Background="#ffffff" 
-                            HorizontalContentAlignment="Left" 
-                            VerticalContentAlignment="Top" 
-                            Padding="20,10"
-                            FontSize="16" Cursor="Hand"
-                            >
+                    <Button
+                        Margin="20,20,20,10"
+                        Padding="20,10"
+                        HorizontalContentAlignment="Left"
+                        VerticalContentAlignment="Top"
+                        Background="#ffffff"
+                        Cursor="Hand"
+                        FontSize="16"
+                        Style="{DynamicResource homeWorkoutBtn}" Click="Button_Click">
                         <StackPanel Margin="0,0,-530,0">
-                            <Image Source="/Images/RunningTry.png" Height="141" Width="435" HorizontalAlignment="Right"/>
-                            <TextBlock Foreground="Black" Text="Workout" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,-140,0,0" FontSize="18"/>
+                            <Image
+                                Width="435"
+                                Height="141"
+                                HorizontalAlignment="Right"
+                                Source="/Images/RunningTry.png" />
+                            <TextBlock
+                                Margin="15,-140,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                FontSize="18"
+                                Foreground="Black"
+                                Text="Workout" />
                         </StackPanel>
 
                     </Button>
 
-                    <!--Food Button-->
+                    <!--  Food Button  -->
 
-                    <Border  CornerRadius="20" Margin="20,10,20,20" Grid.Row="1" Background="White">
+                    <Border
+                        Grid.Row="1"
+                        Margin="20,10,20,20"
+                        Background="White"
+                        CornerRadius="20">
                         <Border.Effect>
                             <DropShadowEffect
                                 Direction="315"
@@ -231,19 +300,30 @@
                         </Border.Effect>
 
                     </Border>
-                    <Button Style="{DynamicResource homeFoodBtn}" Margin="20,10,20,10"
-                            Grid.Row="1"
-                            Background="White"
+                    <Button
+                        Grid.Row="1"
+                        Margin="20,10,20,10"
+                        Padding="20,10"
+                        HorizontalContentAlignment="Left"
+                        VerticalContentAlignment="Top"
+                        Background="White"
+                        Cursor="Hand"
+                        FontSize="16"
+                        Style="{DynamicResource homeFoodBtn}">
 
-                            HorizontalContentAlignment="Left" 
-                            VerticalContentAlignment="Top" 
-                            Padding="20,10"
-                            FontSize="16" Cursor="Hand"
-                            >
-
-                        <StackPanel Height="160" Width="534">
-                            <Image Source="/Images/SaladTry.png" Height="141" Width="438" Margin="70,0,0,0"/>
-                            <TextBlock Foreground="Black" Text="Food" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,-140,0,0" FontSize="18"/>
+                        <StackPanel Width="534" Height="160">
+                            <Image
+                                Width="438"
+                                Height="141"
+                                Margin="70,0,0,0"
+                                Source="/Images/SaladTry.png" />
+                            <TextBlock
+                                Margin="15,-140,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                FontSize="18"
+                                Foreground="Black"
+                                Text="Food" />
                         </StackPanel>
 
                     </Button>
@@ -283,8 +363,8 @@
                             Kind="Emoticon" />
                         <Grid Height="141" Margin="0,15,0,0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="99*"/>
-                                <ColumnDefinition Width="43*"/>
+                                <ColumnDefinition Width="99*" />
+                                <ColumnDefinition Width="43*" />
                             </Grid.ColumnDefinitions>
 
                             <Label
@@ -295,12 +375,13 @@
                                 FontSize="16"
                                 FontWeight="SemiBold"
                                 Foreground="White" />
-                            <Label  Grid.Column="1"
+                            <Label
                                 x:Name="weightLbl"
+                                Grid.Column="1"
                                 Height="31"
                                 Margin="0,0,10,110"
-                                HorizontalContentAlignment="Right"
                                 VerticalAlignment="Bottom"
+                                HorizontalContentAlignment="Right"
                                 Content="HEHE"
                                 FontSize="16"
                                 FontWeight="SemiBold"
@@ -315,14 +396,15 @@
                                 Foreground="White" />
                             <Label
                                 x:Name="goalWeightLbl"
-                                HorizontalContentAlignment="Right"
+                                Grid.Column="1"
                                 Height="31"
                                 Margin="0,29,10,0"
                                 VerticalAlignment="Top"
+                                HorizontalContentAlignment="Right"
                                 Content="HEHE"
                                 FontSize="16"
                                 FontWeight="SemiBold"
-                                Foreground="White" Grid.Column="1" />
+                                Foreground="White" />
                             <Label
                                 Margin="10,56,14,57"
                                 Content="Recommended Water: "
@@ -330,15 +412,16 @@
                                 FontWeight="SemiBold"
                                 Foreground="White" />
                             <Label
-                                Grid.Column="1"
                                 x:Name="recommendedWaterLbl"
-                                HorizontalContentAlignment="Right"
+                                Grid.Column="1"
                                 Height="30"
+                                Margin="0,0,10,0"
                                 VerticalAlignment="Center"
+                                HorizontalContentAlignment="Right"
                                 Content="HEHE"
                                 FontSize="16"
                                 FontWeight="SemiBold"
-                                Foreground="White" Margin="0,0,10,0" />
+                                Foreground="White" />
                             <Label
                                 Height="29"
                                 Margin="10,0,5,30"
@@ -348,12 +431,12 @@
                                 FontWeight="SemiBold"
                                 Foreground="White" />
                             <Label
-                                Grid.Column="1"
                                 x:Name="caloriesLbl"
-                                HorizontalContentAlignment="Right"
+                                Grid.Column="1"
                                 Height="30"
                                 Margin="0,82,10,0"
                                 VerticalAlignment="Top"
+                                HorizontalContentAlignment="Right"
                                 Content="HEHE"
                                 FontSize="16"
                                 FontWeight="SemiBold"
@@ -368,14 +451,15 @@
                                 Foreground="White" />
                             <Label
                                 x:Name="activityLvl"
-                                HorizontalContentAlignment="Right"
+                                Grid.ColumnSpan="2"
                                 Height="30"
                                 Margin="160,110,10,0"
                                 VerticalAlignment="Top"
+                                HorizontalContentAlignment="Right"
                                 Content="HEHE"
                                 FontSize="16"
                                 FontWeight="SemiBold"
-                                Foreground="White" Grid.ColumnSpan="2" />
+                                Foreground="White" />
                         </Grid>
                     </StackPanel>
 
@@ -392,31 +476,32 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" Style="{StaticResource borderStyle_row2}" />
-                <Label x:Name="foodBarStat"
-                       Content="Value"
-                       
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Margin="48,100"
-                       >
-                </Label>
+                <Label
+                    x:Name="foodBarStat"
+                    Margin="48,100"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Value" />
 
-                <Label x:Name="foodBarLbl"
-                       Content ="Your Calories intake today: "
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Margin="48,80"
-                       >
-                </Label>
+                <Label
+                    x:Name="foodBarLbl"
+                    Margin="48,80"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Your Calories intake today: " />
                 <ProgressBar
-                x:Name="calorieProgressBar"
-                Height="30"
-                Width="200"
-                Margin="50,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Maximum="2500"
-                Foreground="{StaticResource MyGradientBrush}" />
+                    x:Name="calorieProgressBar"
+                    Width="200"
+                    Height="30"
+                    Margin="50,0"
+                    Background="White"
+                    BorderBrush="LightGray"
+                    BorderThickness="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="{StaticResource MyGradientBrush}"
+                    Maximum="2500"
+                    Style="{DynamicResource calorieTrackerStyle}"/>
                 <Border
                     Grid.Column="0"
                     Height="50"
@@ -470,7 +555,7 @@
                         Kind="Dumbbell"
                         Style="{StaticResource menuButtonIcon}" />
                 </Border>
-                <Border Grid.Column="2" Style="{StaticResource borderStyle_row2}"  />
+                <Border Grid.Column="2" Style="{StaticResource borderStyle_row2}" />
                 <Border
                     Grid.Column="2"
                     Height="50"

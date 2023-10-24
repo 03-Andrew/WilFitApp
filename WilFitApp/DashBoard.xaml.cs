@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
+using WilFitApp.DataBase;
+using WilFitApp.MVVM.Model;
 using WilFitApp.MVVM.View;
 
 namespace WilFitApp
@@ -25,15 +28,35 @@ namespace WilFitApp
     {
 
         string _name;
+        calorieHistory cal = new calorieHistory();
+        connection con = new connection();
+        SqlConnection conn;
+        SqlCommand cmd;
         public DashBoard(string name)
         {
             InitializeComponent();
             HomeView homeView = new HomeView();
             homeView.SetLabelText(name);
             _name = name;
+            setCalories();
             MainFrame.Content = new zPages.HomePage1(_name);
             //homeViewContainer.Content = homeView;
         }
+
+        public void setCalories()
+        {
+            using (SqlConnection conn = con.getCon())
+            {
+                conn.Open();
+                SqlCommand selectCmd = new SqlCommand($"SELECT calories FROM calorieHistory WHERE userName = @_name", conn);
+                selectCmd.Parameters.AddWithValue("_name", _name);
+
+                object result = selectCmd.ExecuteScalar();
+                double currentValue = Convert.ToDouble(result);
+                cal.calories = currentValue;
+            }
+        }
+
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -88,16 +111,17 @@ namespace WilFitApp
 
         private void Food_Btn_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new zPages.FoodPage(_name);
+            MainFrame.Content = new zPages.HomePage(_name, cal.calories);
         }
 
         private void WorkoutLog_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new zPages.HomePage(_name);
+            MainFrame.Content = new zPages.HomePage(_name, cal.calories);
         }
 
         private void Workout_Btn_Click(object sender, RoutedEventArgs e)
         {
+            
             MainFrame.Content = new zPages.WorkoutPage(_name);
         }
 
